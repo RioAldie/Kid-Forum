@@ -1,21 +1,27 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
+import CardFeature from './CardFeature';
 
 const Feature = () => {
   return (
     <Box
       sx={{
         width: '80%',
-        height: '500px',
-        border: 'solid 1px #000',
+        height: '200px',
+        border: 'solid 1px #E90064',
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '10px',
+        flexFlow: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
+        mt: '50px',
+        borderRadius: '8px',
       }}>
-      <Box
-        sx={{
-          width: '200px',
-          height: '60px',
-          border: 'solid 1px #000',
-        }}>
-        Feature 1
-      </Box>
+      <CardFeature />
+      <CardFeature />
+      <CardFeature />
+      <CardFeature />
     </Box>
   );
 };

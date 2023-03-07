@@ -4,7 +4,7 @@ import Feature from './Feature';
 
 const Hero = () => {
   return (
-    <Container>
+    <>
       <Box sx={{ marginTop: '50px' }}>
         <Typography
           sx={{
@@ -26,7 +26,7 @@ const Hero = () => {
         </Typography>
       </Box>
       <div>Thumbail</div>
-    </Container>
+    </>
   );
 };
 
