@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import React from 'react';
 import Feature from '../components/Feature';
 import Footer from '../components/Footer';
@@ -9,10 +9,17 @@ const Home = () => {
   return (
     <>
       <ResponsiveAppBar />
-      <Container>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
+          padding: '0',
+          width: '100%',
+          overflow: 'hidden',
+        }}>
         <Hero />
-        <Feature />
-      </Container>
+      </Box>
     </>
   );
 };

@@ -7,6 +7,7 @@ const CardFeature = () => {
     <Box
       sx={{
         width: '200px',
+        cursor: 'pointer',
         height: '60px',
         border: 'solid 2px #bfbfbf',
         justifyContent: 'center',
