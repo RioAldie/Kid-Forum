@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import * as React from 'react';
 import ButtonGoLapor from './ButtonGoLapor';
 
@@ -8,11 +8,14 @@ const Hero = () => {
       sx={{
         bgcolor: '#FF0032',
         height: '600px',
-        padding: '20px',
+        padding: '40px',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'start',
         width: '100%',
+        borderBottom: '20px #F0A5B4 solid',
+        borderBottomRightRadius: '80px',
+        gap: '20px',
       }}>
       <Typography
         sx={{
