@@ -1,5 +1,7 @@
 import { Box, Container } from '@mui/material';
 import React from 'react';
+import Feature from '../components/Feature';
+import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import ResponsiveAppBar from '../layout/Navbar';
 
@@ -17,7 +19,9 @@ const Home = () => {
           overflow: 'hidden',
         }}>
         <Hero />
+        <Feature />
       </Box>
+      <Footer />
     </>
   );
 };
