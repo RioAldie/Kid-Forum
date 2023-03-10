@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 import CardFeature from './CardFeature';
 import datasFeature from '../services/features';
+import ButtonGoRed from './ButtonGoRed';
 
 const Feature = () => {
   return (
@@ -12,6 +13,7 @@ const Feature = () => {
         flexDirection: 'column',
         alignItems: 'center',
         marginTop: '100px',
+        gap: '30px',
       }}>
       <Typography
         sx={{
@@ -44,6 +46,7 @@ const Feature = () => {
           return <CardFeature name={data.name} icon={data.icon} />;
         })}
       </Box>
+      <ButtonGoRed />
     </Box>
   );
 };

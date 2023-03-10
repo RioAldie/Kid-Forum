@@ -15,7 +15,7 @@ const Hero = () => {
         width: '100%',
         borderBottom: '20px #F0A5B4 solid',
         borderBottomRightRadius: '80px',
-        gap: '20px',
+        gap: '30px',
       }}>
       <Typography
         sx={{

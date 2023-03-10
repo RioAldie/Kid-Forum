@@ -3,6 +3,8 @@ import React from 'react';
 import Feature from '../components/Feature';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
+import Services from '../components/Services';
+import Sticker from '../components/Sticker';
 import ResponsiveAppBar from '../layout/Navbar';
 
 const Home = () => {
@@ -20,6 +22,8 @@ const Home = () => {
         }}>
         <Hero />
         <Feature />
+        <Sticker />
+        <Services />
       </Box>
       <Footer />
     </>

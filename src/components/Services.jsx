@@ -1,7 +1,84 @@
+import { Box, Typography } from '@mui/material';
 import React from 'react';
+import CardService from './CardService';
 
 const Services = () => {
-  return <div>Services</div>;
+  return (
+    <Box
+      sx={{
+        width: '407px',
+        marginTop: '100px',
+        display: 'flex',
+        flexFlow: 'column',
+        gap: '30px',
+      }}>
+      <Box>
+        <Typography
+          sx={{
+            fontSize: '26px',
+            lineHeight: '39px',
+            fontWeight: '600',
+            color: '#DE002C',
+          }}>
+          Layanan
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: '16px',
+            lineHeight: '24px',
+            fontWeight: '500',
+          }}>
+          Tindak Lanjut bagi Korban Kekerasan terhadap perempuan dan
+          anak{' '}
+          <span
+            style={{
+              fontWeight: '600',
+            }}>
+            (KTPA)
+          </span>{' '}
+          .
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          width: '407px',
+          height: '690px',
+        }}>
+        <Box
+          sx={{
+            width: '389px',
+            height: '658px',
+            bgcolor: '#FF0032',
+            position: 'absolute',
+            zIndex: '1000',
+            marginLeft: '30px',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}>
+          <CardService />
+        </Box>
+        <Box
+          sx={{
+            width: '389px',
+            height: '658px',
+            bgcolor: '#F56C87',
+            position: 'absolute',
+            marginTop: '15px',
+            marginLeft: '15px',
+            zIndex: '100',
+          }}></Box>
+        <Box
+          sx={{
+            width: '389px',
+            height: '658px',
+            bgcolor: '#FFC2CE',
+            position: 'absolute',
+            marginTop: '30px',
+          }}></Box>
+      </Box>
+    </Box>
+  );
 };
 
 export default Services;
