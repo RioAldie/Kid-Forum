@@ -1,7 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 
-const CardService = () => {
+const CardService = (props) => {
+  const { name, no } = props;
   return (
     <Box
       sx={{
@@ -10,7 +11,6 @@ const CardService = () => {
         alignItems: 'center',
         width: '80%',
         height: '50px',
-        border: 'solid 1px #fff',
         gap: '30px',
       }}>
       <Typography
@@ -27,7 +27,7 @@ const CardService = () => {
           fontSize: '18px',
           fontWeight: '600',
         }}>
-        1
+        {no}
       </Typography>
       <Typography
         sx={{
@@ -35,7 +35,7 @@ const CardService = () => {
           fontSize: '18px',
           fontWeight: '600',
         }}>
-        Rujukan Langsung
+        {name}
       </Typography>
     </Box>
   );

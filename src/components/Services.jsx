@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import dataService from '../services/layanan';
 import CardService from './CardService';
 
 const Services = () => {
@@ -27,6 +28,7 @@ const Services = () => {
             fontSize: '16px',
             lineHeight: '24px',
             fontWeight: '500',
+            marginTop: '20px',
           }}>
           Tindak Lanjut bagi Korban Kekerasan terhadap perempuan dan
           anak{' '}
@@ -36,7 +38,6 @@ const Services = () => {
             }}>
             (KTPA)
           </span>{' '}
-          .
         </Typography>
       </Box>
       <Box
@@ -55,8 +56,13 @@ const Services = () => {
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
+            justifyContent: 'space-evenly',
           }}>
-          <CardService />
+          {dataService.map((data, i) => {
+            return (
+              <CardService key={i} name={data.name} no={data.no} />
+            );
+          })}
         </Box>
         <Box
           sx={{
