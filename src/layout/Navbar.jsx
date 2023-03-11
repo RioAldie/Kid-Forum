@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Lapor', 'Tentang', 'Kontak'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -40,7 +40,10 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'flex', md: 'none' },
+            }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -66,10 +69,22 @@ function ResponsiveAppBar() {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
+                border: 'solid 1px #000',
               }}>
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ textTransform: 'none' }}>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      textTransform: 'none',
+                    }}>
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -82,12 +97,26 @@ function ResponsiveAppBar() {
           />
 
           <Box
-            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+              justifyContent: 'center',
+              gap: '50px',
+            }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}>
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  display: 'block',
+                  textTransform: 'none',
+                  fontSize: '16px',
+                  '&hover': {
+                    borderBottom: 'solid 1px #fff',
+                  },
+                }}>
                 {page}
               </Button>
             ))}

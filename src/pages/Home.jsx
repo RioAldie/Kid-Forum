@@ -9,24 +9,20 @@ import ResponsiveAppBar from '../layout/Navbar';
 
 const Home = () => {
   return (
-    <>
-      <ResponsiveAppBar />
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-          padding: '0',
-          width: '100%',
-          overflow: 'hidden',
-        }}>
-        <Hero />
-        <Feature />
-        <Sticker />
-        <Services />
-      </Box>
-      <Footer />
-    </>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        padding: '0',
+        width: '100%',
+        overflow: 'hidden',
+      }}>
+      <Hero />
+      <Feature />
+      <Sticker />
+      <Services />
+    </Box>
   );
 };
 
