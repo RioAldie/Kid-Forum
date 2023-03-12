@@ -26,6 +26,7 @@ const Footer = () => {
         gap: '20px',
         justifyContent: 'space-around',
         flexWrap: 'wrap',
+        marginBottom: '0px',
       }}>
       <Box
         sx={{

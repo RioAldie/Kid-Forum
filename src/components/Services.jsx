@@ -7,7 +7,7 @@ const Services = () => {
   return (
     <Box
       sx={{
-        width: '407px',
+        minWidth: '50%',
         marginTop: '100px',
         display: 'flex',
         flexFlow: 'column',
