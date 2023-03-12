@@ -2,14 +2,23 @@ import {
   Box,
   Button,
   FormControl,
+  Modal,
   TextField,
   Typography,
 } from '@mui/material';
 import { bgcolor } from '@mui/system';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { TrixEditor } from 'react-trix';
+import { StatusCtx } from '../context/StatusContext';
+import AlertNotif from './AlertNotif';
 
 const FormReport = () => {
+  const { status, setStatus } = useContext(StatusCtx);
+
+  const handleStatus = () => {
+    setStatus(!status);
+  };
+  console.log(status);
   return (
     <Box
       sx={{
@@ -26,6 +35,7 @@ const FormReport = () => {
         padding: '10px',
         borderRadius: '8px',
       }}>
+      <AlertNotif status={status} />
       <Typography
         variant="h6"
         sx={{
@@ -88,7 +98,8 @@ const FormReport = () => {
           variant="contained"
           sx={{
             height: '50px',
-          }}>
+          }}
+          onClick={() => handleStatus()}>
           Lapor!
         </Button>
       </FormControl>
