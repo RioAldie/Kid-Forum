@@ -102,6 +102,7 @@ const FormReport = () => {
           onClick={() => handleStatus()}>
           Lapor!
         </Button>
+        <a href="https://wa.me/0895702695858/?text=woii">Tes</a>
       </FormControl>
     </Box>
   );
