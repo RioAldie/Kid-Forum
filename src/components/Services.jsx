@@ -12,6 +12,7 @@ const Services = () => {
         display: 'flex',
         flexFlow: 'column',
         gap: '30px',
+        alignItems: 'center',
       }}>
       <Box>
         <Typography
@@ -25,7 +26,7 @@ const Services = () => {
         </Typography>
         <Typography
           sx={{
-            fontSize: '16px',
+            fontSize: '18px',
             lineHeight: '24px',
             fontWeight: '500',
             marginTop: '20px',
