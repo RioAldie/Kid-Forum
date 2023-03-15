@@ -94,15 +94,17 @@ const FormReport = () => {
           type="email"
           variant="outlined"
         />
-        <Button
-          variant="contained"
-          sx={{
-            height: '50px',
-          }}
-          onClick={() => handleStatus()}>
-          Lapor!
-        </Button>
-        <a href="https://wa.me/0895702695858/?text=woii">Tes</a>
+
+        <a href="https://web.whatsapp.com/send?phone=0895702695858&text=tes&app_absent=0”">
+          <Button
+            variant="contained"
+            sx={{
+              height: '50px',
+            }}
+            onClick={() => handleStatus()}>
+            Lapor!
+          </Button>
+        </a>
       </FormControl>
     </Box>
   );
