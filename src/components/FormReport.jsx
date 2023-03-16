@@ -6,19 +6,34 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { bgcolor } from '@mui/system';
-import React, { useContext, useState } from 'react';
-import { TrixEditor } from 'react-trix';
+import React, { useContext, useEffect, useRef } from 'react';
 import { StatusCtx } from '../context/StatusContext';
 import AlertNotif from './AlertNotif';
 
 const FormReport = () => {
   const { status, setStatus } = useContext(StatusCtx);
+  const name = useRef('');
+  const email = useRef('');
+  const title = useRef('');
+  const body = useRef('');
+  const phone = useRef('');
 
   const handleStatus = () => {
-    setStatus(!status);
+    // setStatus(!status);
+
+    const dataReport = {
+      name,
+      email,
+      title,
+      body,
+      phone,
+    };
+    console.log(' report : ', dataReport);
   };
-  console.log(status);
+  const handleInputValue = (value, ref) => {
+    ref.current = value;
+  };
+
   return (
     <Box
       sx={{
@@ -65,6 +80,7 @@ const FormReport = () => {
           label="Nama"
           type="text"
           variant="outlined"
+          onChange={(e) => handleInputValue(e.target.value, name)}
         />
         <TextField
           fullWidth
@@ -72,13 +88,16 @@ const FormReport = () => {
           label="Judul Laporan / Tema Laporan"
           type="text"
           variant="outlined"
+          onChange={(e) => handleInputValue(e.target.value, title)}
         />
         <TextField
           id="outline-basic"
           label="Isi Laporan anda"
+          type={'text'}
           multiline
           rows={4}
           variant="outlined"
+          onChange={(e) => handleInputValue(e.target.value, body)}
         />
         <TextField
           fullWidth
@@ -86,6 +105,7 @@ const FormReport = () => {
           label="No HP"
           type="number"
           variant="outlined"
+          onChange={(e) => handleInputValue(e.target.value, phone)}
         />
         <TextField
           fullWidth
@@ -93,18 +113,19 @@ const FormReport = () => {
           label="Email"
           type="email"
           variant="outlined"
+          onChange={(e) => handleInputValue(e.target.value, email)}
         />
-
-        <a href="https://web.whatsapp.com/send?phone=0895702695858&text=tes&app_absent=0”">
-          <Button
-            variant="contained"
-            sx={{
-              height: '50px',
-            }}
-            onClick={() => handleStatus()}>
-            Lapor!
-          </Button>
-        </a>
+        <Button
+          variant="contained"
+          sx={{
+            height: '50px',
+          }}
+          onClick={() => handleStatus()}>
+          Lapor!
+        </Button>
+        {/* <a href="https://wa.me/send?phone=0895702695858&text=tes&app_absent=0" target={'_blank'}>
+          
+        </a> */}
       </FormControl>
     </Box>
   );
