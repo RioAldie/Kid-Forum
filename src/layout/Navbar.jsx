@@ -10,6 +10,8 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import Auth from '../config/Auth';
+import { Link } from 'react-router-dom';
 
 const pages = ['Lapor', 'Tentang', 'Kontak'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -89,13 +91,14 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <img
-            src="/images/aduin-logo.png"
-            width={67}
-            height={25}
-            alt="logo"
-          />
-
+          <Link src="/">
+            <img
+              src="/images/aduin-logo.png"
+              width={67}
+              height={25}
+              alt="logo"
+            />
+          </Link>
           <Box
             sx={{
               flexGrow: 1,
@@ -146,6 +149,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
+            <Auth />
           </Box>
         </Toolbar>
       </Container>

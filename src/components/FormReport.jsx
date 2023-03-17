@@ -123,9 +123,11 @@ const FormReport = () => {
           onClick={() => handleStatus()}>
           Lapor!
         </Button>
-        {/* <a href="https://wa.me/send?phone=0895702695858&text=tes&app_absent=0" target={'_blank'}>
-          
-        </a> */}
+        <a
+          href="https://wa.me/send?phone=0895702695858&text=hello cuy"
+          target={'_blank'}>
+          tes
+        </a>
       </FormControl>
     </Box>
   );
