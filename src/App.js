@@ -6,6 +6,7 @@ import {
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './layout';
+import Dashboard from './pages/Admin';
 import Home from './pages/Home';
 import Report from './pages/Report';
 
@@ -38,6 +39,7 @@ function App() {
               </Layout>
             }
           />
+          <Route path="/admin" element={<Dashboard />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

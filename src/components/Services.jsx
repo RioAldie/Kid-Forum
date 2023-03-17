@@ -14,7 +14,10 @@ const Services = () => {
         gap: '30px',
         alignItems: 'center',
       }}>
-      <Box>
+      <Box
+        sx={{
+          width: '90%',
+        }}>
         <Typography
           sx={{
             fontSize: '26px',
@@ -43,12 +46,12 @@ const Services = () => {
       </Box>
       <Box
         sx={{
-          width: '407px',
+          width: '380px',
           height: '690px',
         }}>
         <Box
           sx={{
-            width: '389px',
+            width: '350px',
             height: '658px',
             bgcolor: '#FF0032',
             position: 'absolute',
@@ -67,7 +70,7 @@ const Services = () => {
         </Box>
         <Box
           sx={{
-            width: '389px',
+            width: '350px',
             height: '658px',
             bgcolor: '#F56C87',
             position: 'absolute',
@@ -77,7 +80,7 @@ const Services = () => {
           }}></Box>
         <Box
           sx={{
-            width: '389px',
+            width: '350px',
             height: '658px',
             bgcolor: '#FFC2CE',
             position: 'absolute',

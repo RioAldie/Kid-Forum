@@ -30,7 +30,7 @@ const Feature = () => {
       <Box
         sx={{
           width: '80%',
-          height: '200px',
+          minHeight: '200px',
           border: 'solid 2px #F0A5B4',
           display: 'flex',
           flexDirection: 'row',
@@ -43,7 +43,9 @@ const Feature = () => {
           py: '20px',
         }}>
         {datasFeature.map((data, i) => {
-          return <CardFeature name={data.name} icon={data.icon} />;
+          return (
+            <CardFeature name={data.name} icon={data.icon} key={i} />
+          );
         })}
       </Box>
       <ButtonGoRed />
