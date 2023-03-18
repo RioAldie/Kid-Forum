@@ -16,14 +16,16 @@ const style = {
   p: 4,
 };
 
-export default function ReportModal() {
+export default function ReportModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const { title, body } = props;
+
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>Lihat</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -34,11 +36,10 @@ export default function ReportModal() {
             id="modal-modal-title"
             variant="h6"
             component="h2">
-            Text in a modal
+            {title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor
-            ligula.
+            {body}
           </Typography>
         </Box>
       </Modal>

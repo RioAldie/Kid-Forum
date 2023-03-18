@@ -96,7 +96,7 @@ export default function BasicTable() {
                 <StatusReport status={row.status} />
               </CellStyled>
               <CellStyled>
-                <ReportModal />
+                <ReportModal title={row.title} body={row.body} />
               </CellStyled>
               <CellStyled>
                 <BoxAction />
