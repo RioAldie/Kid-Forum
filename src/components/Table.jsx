@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,6 +5,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { collection, getDocs } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { db } from '../config';
+import { Box, Button, ButtonGroup, styled } from '@mui/material';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import EmailIcon from '@mui/icons-material/Email';
+import CheckIcon from '@mui/icons-material/Check';
+import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
+import BoxAction from './BoxAction';
+import StatusReport from './StatusReport';
+import ReportModal from './ReportModal';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -20,32 +30,98 @@ const rows = [
 ];
 
 export default function BasicTable() {
+  const [reportList, setReportList] = useState([]);
+
+  const reportCollection = collection(db, 'reports');
+
+  const CellStyled = styled(TableCell)({
+    textAlign: 'center',
+    minWidth: 200,
+    maxWidth: 500,
+  });
+
+  useEffect(() => {
+    const getReportList = async () => {
+      try {
+        const data = await getDocs(reportCollection);
+
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+
+        console.log(filteredData);
+        setReportList(filteredData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getReportList();
+  }, []);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <CellStyled>Judul</CellStyled>
+            <CellStyled>Nama</CellStyled>
+            <CellStyled>Email</CellStyled>
+            <CellStyled>Tanggal</CellStyled>
+            <CellStyled>Status</CellStyled>
+            <CellStyled>Isi</CellStyled>
+            <CellStyled>Action</CellStyled>
+            <CellStyled>Tanggapi</CellStyled>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {reportList.map((row, i) => (
             <TableRow
-              key={row.name}
+              key={i}
               sx={{
                 '&:last-child td, &:last-child th': { border: 0 },
               }}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <CellStyled
+                component="th"
+                scope="row"
+                sx={{
+                  fontWeight: 600,
+                }}>
+                {row.title}
+              </CellStyled>
+              <CellStyled>{row.name}</CellStyled>
+              <CellStyled>{row.email}</CellStyled>
+              <CellStyled>{row.date}</CellStyled>
+              <CellStyled>
+                <StatusReport status={row.status} />
+              </CellStyled>
+              <CellStyled>
+                <ReportModal />
+              </CellStyled>
+              <CellStyled>
+                <BoxAction />
+              </CellStyled>
+              <CellStyled>
+                <ButtonGroup
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    gap: '15px',
+                    justifyContent: 'center',
+                  }}>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    sx={{
+                      bgcolor: '#4caf50',
+                    }}>
+                    <CheckIcon />
+                  </Button>
+                  <Button variant="contained" color="error">
+                    <DoNotDisturbIcon />
+                  </Button>
+                </ButtonGroup>
+              </CellStyled>
             </TableRow>
           ))}
         </TableBody>
