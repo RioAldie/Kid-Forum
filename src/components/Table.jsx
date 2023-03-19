@@ -99,7 +99,7 @@ export default function BasicTable() {
                 <ReportModal title={row.title} body={row.body} />
               </CellStyled>
               <CellStyled>
-                <BoxAction />
+                <BoxAction phone={row.phone} />
               </CellStyled>
               <CellStyled>
                 <ButtonGroup
