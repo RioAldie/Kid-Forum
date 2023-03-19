@@ -3,14 +3,29 @@ import {
   CssBaseline,
   ThemeProvider,
 } from '@mui/material';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useContext } from 'react';
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import './App.css';
+import { loginCtx } from './context/LoginContext';
 import Layout from './layout';
 import Dashboard from './pages/Admin';
 import Home from './pages/Home';
 import Report from './pages/Report';
 
 function App() {
+  const { isLogin, setShow } = useContext(loginCtx);
+  const RequireAuth = ({ children }) => {
+    if (isLogin) {
+      return <>{children}</>;
+    }
+
+    return <Navigate to={'/'} />;
+  };
   const customeTheme = createTheme({
     palette: {
       primary: {
@@ -35,11 +50,20 @@ function App() {
             path="/Report"
             element={
               <Layout>
-                <Report />
+                <RequireAuth>
+                  <Report />
+                </RequireAuth>
               </Layout>
             }
           />
-          <Route path="/admin" element={<Dashboard />} />
+          <Route
+            path="/admin"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

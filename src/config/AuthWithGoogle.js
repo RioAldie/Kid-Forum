@@ -3,8 +3,9 @@ import { auth, googleProvider } from '.';
 import { signInWithPopup, signOut } from 'firebase/auth';
 import { useContext, useState } from 'react';
 import { loginCtx } from '../context/LoginContext';
+import GoogleButton from 'react-google-button';
 
-const Auth = () => {
+const AuthWithGoogle = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { isLogin, setIsLogin } = useContext(loginCtx);
@@ -37,25 +38,20 @@ const Auth = () => {
   };
   console.log(isLogin);
   return (
-    <Box>
-      {!isLogin && (
-        <Button
-          variant="outlined"
-          sx={{ color: '#fff' }}
-          onClick={() => signInWIthGoogle()}>
-          Login
-        </Button>
-      )}
-      {isLogin && (
-        <Button
-          variant="outlined"
-          sx={{ color: '#fff' }}
-          onClick={() => signOutWIthGoogle()}>
-          Logout
-        </Button>
-      )}
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+      }}>
+      <GoogleButton
+        onClick={() => {
+          signInWIthGoogle();
+        }}
+      />
     </Box>
   );
 };
 
-export default Auth;
+export default AuthWithGoogle;
