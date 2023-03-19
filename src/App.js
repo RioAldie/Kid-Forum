@@ -16,6 +16,7 @@ import Layout from './layout';
 import Dashboard from './pages/Admin';
 import Home from './pages/Home';
 import Report from './pages/Report';
+import Signup from './pages/Signup';
 
 function App() {
   const { isLogin, setShow } = useContext(loginCtx);
@@ -43,6 +44,14 @@ function App() {
             element={
               <Layout>
                 <Home />
+              </Layout>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Layout>
+                <Signup />
               </Layout>
             }
           />
