@@ -8,6 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import BtnLogOut from './BtnLogOut';
 
 export const mainListItems = (
   <React.Fragment>
@@ -37,17 +38,6 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Statistik" />
     </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LogoutIcon color="primary" />
-      </ListItemIcon>
-      <ListItemText
-        primary="Keluar"
-        sx={{
-          color: '#ff0032',
-          fontWeight: '600',
-        }}
-      />
-    </ListItemButton>
+    <BtnLogOut />
   </React.Fragment>
 );
