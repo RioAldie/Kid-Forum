@@ -9,7 +9,7 @@ import { auth, googleProvider } from '../config';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 
-const BtnLogOut = () => {
+const AdminLogout = () => {
   const navigate = useNavigate();
   const signOutWIthGoogle = async () => {
     try {
@@ -19,7 +19,6 @@ const BtnLogOut = () => {
         })
         .finally(() => {
           console.log('logout');
-          navigate('/');
         });
     } catch (error) {
       console.error(error);
@@ -41,4 +40,4 @@ const BtnLogOut = () => {
   );
 };
 
-export default BtnLogOut;
+export default AdminLogout;

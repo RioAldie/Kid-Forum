@@ -11,6 +11,8 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import Signin from '../pages/Signin';
+import { loginCtx } from '../context/LoginContext';
+import Signoutbutton from '../components/Signoutbutton';
 
 const pages = ['Lapor', 'Tentang', 'Kontak'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -18,6 +20,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { isLogin } = React.useContext(loginCtx);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -151,7 +154,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-            <Signin />
+            {isLogin ? <Signoutbutton /> : <Signin />}
           </Box>
         </Toolbar>
       </Container>

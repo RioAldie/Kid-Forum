@@ -8,7 +8,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import BtnLogOut from './BtnLogOut';
+import AdminLogout from './AdminLogout';
 
 export const mainListItems = (
   <React.Fragment>
@@ -38,6 +38,6 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Statistik" />
     </ListItemButton>
-    <BtnLogOut />
+    <AdminLogout />
   </React.Fragment>
 );
