@@ -19,7 +19,7 @@ const AdminLogout = () => {
     try {
       await signOut(auth, googleProvider)
         .then((res) => {
-          localStorage.removeItem('user-active');
+          localStorage.removeItem('admin-active');
         })
         .finally(() => {
           console.log('logout');

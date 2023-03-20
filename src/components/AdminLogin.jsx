@@ -22,7 +22,7 @@ const AdminLogin = () => {
           return setError(true);
         }
         localStorage.setItem(
-          'user-active',
+          'admin-active',
           JSON.stringify(res.user.uid)
         );
         setIsAdmin(true);

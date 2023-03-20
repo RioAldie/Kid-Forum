@@ -6,17 +6,24 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useContext, useEffect, useRef } from 'react';
+import { addDoc, collection } from 'firebase/firestore';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { db } from '../config';
 import { StatusCtx } from '../context/StatusContext';
 import AlertNotif from './AlertNotif';
 
 const FormReport = () => {
   const { status, setStatus } = useContext(StatusCtx);
-  const name = useRef('');
-  const email = useRef('');
-  const title = useRef('');
-  const body = useRef('');
-  const phone = useRef('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleStatus = () => {
     // setStatus(!status);
@@ -27,11 +34,24 @@ const FormReport = () => {
       title,
       body,
       phone,
+      date: new Date().getDate(),
+      status: 'pending',
+      uid: localStorage.getItem('user-active'),
     };
-    console.log(' report : ', dataReport);
+    handleSubmitReport(dataReport);
   };
-  const handleInputValue = (value, ref) => {
-    ref.current = value;
+
+  const reportsCollectionRef = collection(db, 'reports');
+
+  const handleSubmitReport = async (dataReport) => {
+    try {
+      await addDoc(reportsCollectionRef, dataReport).then((res) => {
+        console.log(res);
+        console.log('lapor sukses');
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -80,7 +100,8 @@ const FormReport = () => {
           label="Nama"
           type="text"
           variant="outlined"
-          onChange={(e) => handleInputValue(e.target.value, name)}
+          onChange={(e) => setName(e.target.value)}
+          required
         />
         <TextField
           fullWidth
@@ -88,7 +109,8 @@ const FormReport = () => {
           label="Judul Laporan / Tema Laporan"
           type="text"
           variant="outlined"
-          onChange={(e) => handleInputValue(e.target.value, title)}
+          onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <TextField
           id="outline-basic"
@@ -97,7 +119,8 @@ const FormReport = () => {
           multiline
           rows={4}
           variant="outlined"
-          onChange={(e) => handleInputValue(e.target.value, body)}
+          onChange={(e) => setBody(e.target.value)}
+          required
         />
         <TextField
           fullWidth
@@ -105,7 +128,8 @@ const FormReport = () => {
           label="No HP"
           type="number"
           variant="outlined"
-          onChange={(e) => handleInputValue(e.target.value, phone)}
+          onChange={(e) => setPhone(e.target.value)}
+          required
         />
         <TextField
           fullWidth
@@ -113,7 +137,8 @@ const FormReport = () => {
           label="Email"
           type="email"
           variant="outlined"
-          onChange={(e) => handleInputValue(e.target.value, email)}
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <Button
           variant="contained"
@@ -123,11 +148,6 @@ const FormReport = () => {
           onClick={() => handleStatus()}>
           Lapor!
         </Button>
-        <a
-          href="https://wa.me/send?phone=0895702695858&text=hello cuy"
-          target={'_blank'}>
-          tes
-        </a>
       </FormControl>
     </Box>
   );
