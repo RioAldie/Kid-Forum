@@ -14,6 +14,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthWithGoogle from '../config/AuthWithGoogle';
 import AdminLogin from '../components/AdminLogin';
+import { loginCtx } from '../context/LoginContext';
+import { auth } from '../config';
 
 const StyledModal = styled(Modal)({
   display: 'flex',
@@ -23,6 +25,26 @@ const StyledModal = styled(Modal)({
 const Signin = () => {
   const [open, setOpen] = useState(false);
   const [err, setErr] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { setIsLogin, setShow } = useContext(loginCtx);
+  const signInManual = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password).then(
+        (res) => {
+          console.log(res);
+          localStorage.setItem(
+            'user-active',
+            JSON.stringify(res.user.uid)
+          );
+          setIsLogin(true);
+          setOpen(false);
+        }
+      );
+    } catch (error) {
+      setErr(true);
+    }
+  };
   return (
     <>
       <Button variant="contained" onClick={(e) => setOpen(true)}>
@@ -48,16 +70,14 @@ const Signin = () => {
             flexDirection: 'column',
             justifyContent: 'space-evenly',
           }}>
-          <Typography variant="h5">Welcome Back!</Typography>
-          <Typography variant="subtitle2" sx={{ color: 'grey' }}>
-            a lot creator share their content today, check it now!
-          </Typography>
+          <Typography variant="h5">Halo Aduin</Typography>
           <TextField
             fullWidth
             id="email"
             label="Email"
             type="email"
             variant="outlined"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             fullWidth
@@ -66,12 +86,14 @@ const Signin = () => {
             type="password"
             autoComplete="current-password"
             variant="outlined"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <Button
             sx={{ height: 50 }}
             variant="contained"
-            size="large">
-            Sign In
+            size="large"
+            onClick={(e) => signInManual()}>
+            Masuk
           </Button>
           <AuthWithGoogle />
           <Typography variant="subtitle1">
@@ -82,7 +104,7 @@ const Signin = () => {
           {err && (
             <Stack sx={{ width: '100%' }}>
               <Alert severity="error">
-                Password or Email is Wrong
+                Email atau Password Salah
               </Alert>
             </Stack>
           )}
