@@ -13,6 +13,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthWithGoogle from '../config/AuthWithGoogle';
+import AdminLogin from '../components/AdminLogin';
 
 const StyledModal = styled(Modal)({
   display: 'flex',
@@ -36,7 +37,7 @@ const Signin = () => {
         aria-describedby="modal-modal-description">
         <Box
           width={500}
-          height={400}
+          height={500}
           bgcolor={'background.default'}
           color={'text.primary'}
           p={3}
@@ -74,9 +75,10 @@ const Signin = () => {
           </Button>
           <AuthWithGoogle />
           <Typography variant="subtitle1">
-            Did't Have an Account?
+            Belum Punya Akun?
             <Link to={'/Signup'}>{' Sign Up'}</Link>
           </Typography>
+          <AdminLogin />
           {err && (
             <Stack sx={{ width: '100%' }}>
               <Alert severity="error">

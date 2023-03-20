@@ -24,18 +24,7 @@ const AuthWithGoogle = () => {
       console.error(error);
     }
   };
-  const signOutWIthGoogle = async () => {
-    try {
-      await signOut(auth, googleProvider)
-        .then((res) => {
-          localStorage.removeItem('user-active');
-          setIsLogin(false);
-        })
-        .finally(() => console.log('logout'));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   console.log(isLogin);
   return (
     <Box

@@ -11,6 +11,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import './App.css';
+import { adminCtx } from './context/AdminContext';
 import { loginCtx } from './context/LoginContext';
 import Layout from './layout';
 import Dashboard from './pages/Admin';
@@ -20,11 +21,17 @@ import Signup from './pages/Signup';
 
 function App() {
   const { isLogin, setShow } = useContext(loginCtx);
+  const { isAdmin } = useContext(adminCtx);
   const RequireAuth = ({ children }) => {
     if (isLogin) {
       return <>{children}</>;
     }
-
+    return <Navigate to={'/'} />;
+  };
+  const RequireAdmin = ({ children }) => {
+    if (isAdmin) {
+      return <>{children}</>;
+    }
     return <Navigate to={'/'} />;
   };
   const customeTheme = createTheme({
@@ -68,9 +75,9 @@ function App() {
           <Route
             path="/admin"
             element={
-              <RequireAuth>
+              <RequireAdmin>
                 <Dashboard />
-              </RequireAuth>
+              </RequireAdmin>
             }
           />
         </Routes>
