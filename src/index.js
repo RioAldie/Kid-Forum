@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import StatusCtxProvider from './context/StatusContext';
 import LoginCtxProvider from './context/LoginContext';
+import AdminCtxProvider from './context/AdminContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <StatusCtxProvider>
       <LoginCtxProvider>
-        <App />
+        <AdminCtxProvider>
+          <App />
+        </AdminCtxProvider>
       </LoginCtxProvider>
     </StatusCtxProvider>
   </React.StrictMode>

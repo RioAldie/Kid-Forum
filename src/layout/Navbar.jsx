@@ -9,9 +9,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import Auth from '../config/Auth';
 import { Link } from 'react-router-dom';
+import Signin from '../pages/Signin';
+import { loginCtx } from '../context/LoginContext';
+import Signoutbutton from '../components/Signoutbutton';
 
 const pages = ['Lapor', 'Tentang', 'Kontak'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -19,6 +20,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const { isLogin } = React.useContext(loginCtx);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -91,14 +93,17 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <Link src="/">
-            <img
-              src="/images/aduin-logo.png"
-              width={67}
-              height={25}
-              alt="logo"
-            />
-          </Link>
+          <Box
+            sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
+            <Link to="/">
+              <img
+                src="/images/aduin-logo.png"
+                width={67}
+                height={25}
+                alt="logo"
+              />
+            </Link>
+          </Box>
           <Box
             sx={{
               flexGrow: 1,
@@ -149,7 +154,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-            <Auth />
+            {isLogin ? <Signoutbutton /> : <Signin />}
           </Box>
         </Toolbar>
       </Container>

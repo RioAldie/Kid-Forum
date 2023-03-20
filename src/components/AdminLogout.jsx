@@ -4,13 +4,17 @@ import {
   ListItemText,
 } from '@mui/material';
 import { signOut } from 'firebase/auth';
-import React from 'react';
+import React, { useContext } from 'react';
 import { auth, googleProvider } from '../config';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import { loginCtx } from '../context/LoginContext';
+import { adminCtx } from '../context/AdminContext';
 
-const BtnLogOut = () => {
+const AdminLogout = () => {
   const navigate = useNavigate();
+
+  const { setIsAdmin } = useContext(adminCtx);
   const signOutWIthGoogle = async () => {
     try {
       await signOut(auth, googleProvider)
@@ -19,7 +23,8 @@ const BtnLogOut = () => {
         })
         .finally(() => {
           console.log('logout');
-          navigate('/');
+
+          setIsAdmin(false);
         });
     } catch (error) {
       console.error(error);
@@ -41,4 +46,4 @@ const BtnLogOut = () => {
   );
 };
 
-export default BtnLogOut;
+export default AdminLogout;

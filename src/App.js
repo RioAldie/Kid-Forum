@@ -3,14 +3,37 @@ import {
   CssBaseline,
   ThemeProvider,
 } from '@mui/material';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useContext } from 'react';
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import './App.css';
+import { adminCtx } from './context/AdminContext';
+import { loginCtx } from './context/LoginContext';
 import Layout from './layout';
 import Dashboard from './pages/Admin';
 import Home from './pages/Home';
 import Report from './pages/Report';
+import Signup from './pages/Signup';
 
 function App() {
+  const { isLogin, setShow } = useContext(loginCtx);
+  const { isAdmin } = useContext(adminCtx);
+  const RequireAuth = ({ children }) => {
+    if (isLogin) {
+      return <>{children}</>;
+    }
+    return <Navigate to={'/'} />;
+  };
+  const RequireAdmin = ({ children }) => {
+    if (isAdmin) {
+      return <>{children}</>;
+    }
+    return <Navigate to={'/'} />;
+  };
   const customeTheme = createTheme({
     palette: {
       primary: {
@@ -32,14 +55,31 @@ function App() {
             }
           />
           <Route
-            path="/Report"
+            path="/signup"
             element={
               <Layout>
-                <Report />
+                <Signup />
               </Layout>
             }
           />
-          <Route path="/admin" element={<Dashboard />} />
+          <Route
+            path="/Report"
+            element={
+              <Layout>
+                <RequireAuth>
+                  <Report />
+                </RequireAuth>
+              </Layout>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <RequireAdmin>
+                <Dashboard />
+              </RequireAdmin>
+            }
+          />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
