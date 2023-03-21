@@ -5,10 +5,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../config';
 import { Box, Button, ButtonGroup, styled } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 import CheckIcon from '@mui/icons-material/Check';
@@ -16,6 +23,7 @@ import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import BoxAction from './BoxAction';
 import StatusReport from './StatusReport';
 import ReportModal from './ReportModal';
+import { async } from '@firebase/util';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -31,6 +39,7 @@ const rows = [
 
 export default function BasicTable() {
   const [reportList, setReportList] = useState([]);
+  const [isChange, setIsChange] = useState(false);
 
   const reportCollection = collection(db, 'reports');
 
@@ -39,6 +48,19 @@ export default function BasicTable() {
     minWidth: 200,
     maxWidth: 500,
   });
+
+  const handleDelete = async (id) => {
+    const reportDoc = doc(db, 'reports', id);
+
+    await deleteDoc(reportDoc).finally(() => setIsChange(!isChange));
+  };
+  const handleUpdate = async (id, status) => {
+    const reportDoc = doc(db, 'reports', id);
+
+    await updateDoc(reportDoc, { status: status }).finally(() =>
+      setIsChange(!isChange)
+    );
+  };
 
   useEffect(() => {
     const getReportList = async () => {
@@ -57,7 +79,7 @@ export default function BasicTable() {
       }
     };
     getReportList();
-  }, []);
+  }, [isChange]);
 
   return (
     <TableContainer component={Paper}>
@@ -114,11 +136,21 @@ export default function BasicTable() {
                     color="success"
                     sx={{
                       bgcolor: '#4caf50',
-                    }}>
+                    }}
+                    onClick={() => handleUpdate(row.id, 'terima')}>
                     <CheckIcon />
                   </Button>
-                  <Button variant="contained" color="error">
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    onClick={() => handleUpdate(row.id, 'tolak')}>
                     <DoNotDisturbIcon />
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleDelete(row.id)}>
+                    <DeleteIcon />
                   </Button>
                 </ButtonGroup>
               </CellStyled>
