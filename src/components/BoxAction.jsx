@@ -3,7 +3,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 
 const BoxAction = (props) => {
-  const { phone } = props;
+  const { phone, email } = props;
   return (
     <ButtonGroup
       sx={{
@@ -25,15 +25,16 @@ const BoxAction = (props) => {
           <WhatsAppIcon />
         </Button>
       </a>
-
-      <Button
-        variant="contained"
-        color="info"
-        sx={{
-          bgcolor: '#2979ff',
-        }}>
-        <EmailIcon />
-      </Button>
+      <a href={`mailto:${email}`}>
+        <Button
+          variant="contained"
+          color="info"
+          sx={{
+            bgcolor: '#2979ff',
+          }}>
+          <EmailIcon />
+        </Button>
+      </a>
     </ButtonGroup>
   );
 };

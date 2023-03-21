@@ -23,7 +23,6 @@ import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
 import BoxAction from './BoxAction';
 import StatusReport from './StatusReport';
 import ReportModal from './ReportModal';
-import { async } from '@firebase/util';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -72,7 +71,6 @@ export default function BasicTable() {
           id: doc.id,
         }));
 
-        console.log(filteredData);
         setReportList(filteredData);
       } catch (err) {
         console.error(err);
@@ -121,7 +119,7 @@ export default function BasicTable() {
                 <ReportModal title={row.title} body={row.body} />
               </CellStyled>
               <CellStyled>
-                <BoxAction phone={row.phone} />
+                <BoxAction phone={row.phone} email={row.email} />
               </CellStyled>
               <CellStyled>
                 <ButtonGroup
