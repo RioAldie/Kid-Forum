@@ -6,19 +6,54 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { bgcolor } from '@mui/system';
-import React, { useContext, useState } from 'react';
-import { TrixEditor } from 'react-trix';
+import { addDoc, collection } from 'firebase/firestore';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { db } from '../config';
 import { StatusCtx } from '../context/StatusContext';
 import AlertNotif from './AlertNotif';
 
 const FormReport = () => {
   const { status, setStatus } = useContext(StatusCtx);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+  const [phone, setPhone] = useState('');
 
   const handleStatus = () => {
-    setStatus(!status);
+    // setStatus(!status);
+
+    const dataReport = {
+      name,
+      email,
+      title,
+      body,
+      phone,
+      date: new Date().getDate(),
+      status: 'pending',
+      uid: localStorage.getItem('user-active'),
+    };
+    handleSubmitReport(dataReport);
   };
-  console.log(status);
+
+  const reportsCollectionRef = collection(db, 'reports');
+
+  const handleSubmitReport = async (dataReport) => {
+    try {
+      await addDoc(reportsCollectionRef, dataReport).then((res) => {
+        console.log(res);
+        console.log('lapor sukses');
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -65,6 +100,8 @@ const FormReport = () => {
           label="Nama"
           type="text"
           variant="outlined"
+          onChange={(e) => setName(e.target.value)}
+          required
         />
         <TextField
           fullWidth
@@ -72,13 +109,18 @@ const FormReport = () => {
           label="Judul Laporan / Tema Laporan"
           type="text"
           variant="outlined"
+          onChange={(e) => setTitle(e.target.value)}
+          required
         />
         <TextField
           id="outline-basic"
           label="Isi Laporan anda"
+          type={'text'}
           multiline
           rows={4}
           variant="outlined"
+          onChange={(e) => setBody(e.target.value)}
+          required
         />
         <TextField
           fullWidth
@@ -86,6 +128,8 @@ const FormReport = () => {
           label="No HP"
           type="number"
           variant="outlined"
+          onChange={(e) => setPhone(e.target.value)}
+          required
         />
         <TextField
           fullWidth
@@ -93,18 +137,17 @@ const FormReport = () => {
           label="Email"
           type="email"
           variant="outlined"
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
-
-        <a href="https://web.whatsapp.com/send?phone=0895702695858&text=tes&app_absent=0”">
-          <Button
-            variant="contained"
-            sx={{
-              height: '50px',
-            }}
-            onClick={() => handleStatus()}>
-            Lapor!
-          </Button>
-        </a>
+        <Button
+          variant="contained"
+          sx={{
+            height: '50px',
+          }}
+          onClick={() => handleStatus()}>
+          Lapor!
+        </Button>
       </FormControl>
     </Box>
   );
