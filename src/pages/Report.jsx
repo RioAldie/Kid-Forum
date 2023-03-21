@@ -34,11 +34,11 @@ const Report = () => {
       sx={{
         display: 'flex',
         alignItems: 'center',
-        flexDirection: 'row',
+        flexDirection: 'column',
         padding: '0',
         width: '100%',
         overflow: 'hidden',
-        flexWrap: 'wrap',
+
         justifyContent: 'space-evenly',
         gap: '50px',
       }}>

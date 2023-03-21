@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   FormControl,
@@ -19,6 +20,7 @@ import AlertNotif from './AlertNotif';
 
 const FormReport = () => {
   const { status, setStatus } = useContext(StatusCtx);
+  const [err, setErr] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [title, setTitle] = useState('');
@@ -27,27 +29,48 @@ const FormReport = () => {
 
   const handleStatus = () => {
     // setStatus(!status);
-
+    let day = new Date().getDate();
+    let month = new Date().getMonth();
+    let year = new Date().getFullYear();
+    const date = `${day}-${month}-${year}`;
     const dataReport = {
       name,
       email,
       title,
       body,
       phone,
-      date: new Date().getDate(),
+      date: date,
       status: 'pending',
       uid: localStorage.getItem('user-active'),
     };
+
     handleSubmitReport(dataReport);
   };
 
   const reportsCollectionRef = collection(db, 'reports');
 
+  const resetForm = () => {
+    setName('');
+    setBody('');
+    setEmail('');
+    setPhone('');
+    setTitle('');
+  };
+
   const handleSubmitReport = async (dataReport) => {
     try {
+      if (
+        dataReport.title === '' ||
+        dataReport.name === '' ||
+        dataReport.body === '' ||
+        dataReport.phone === '' ||
+        dataReport.email === ''
+      ) {
+        return setErr(true);
+      }
       await addDoc(reportsCollectionRef, dataReport).then((res) => {
-        console.log(res);
-        console.log('lapor sukses');
+        setStatus(true);
+        resetForm();
       });
     } catch (error) {
       console.error(error);
@@ -58,7 +81,7 @@ const FormReport = () => {
     <Box
       sx={{
         width: {
-          lg: '400px',
+          lg: '800px',
           xs: '350px',
         },
         border: 'solid 2px #bfbfbf',
@@ -74,7 +97,7 @@ const FormReport = () => {
       <Typography
         variant="h6"
         sx={{
-          maxWidth: '350px',
+          maxWidth: '100%',
           height: '60px',
           bgcolor: '#ff0032',
           color: '#fff',
@@ -94,6 +117,10 @@ const FormReport = () => {
           marginTop: '50px',
           height: '600px',
         }}>
+        {err && (
+          <Alert severity="warning">Tolong di isi Semua!</Alert>
+        )}
+
         <TextField
           fullWidth
           id="name"
@@ -101,6 +128,7 @@ const FormReport = () => {
           type="text"
           variant="outlined"
           onChange={(e) => setName(e.target.value)}
+          value={name}
           required
         />
         <TextField
@@ -110,6 +138,7 @@ const FormReport = () => {
           type="text"
           variant="outlined"
           onChange={(e) => setTitle(e.target.value)}
+          value={title}
           required
         />
         <TextField
@@ -120,17 +149,40 @@ const FormReport = () => {
           rows={4}
           variant="outlined"
           onChange={(e) => setBody(e.target.value)}
+          value={body}
           required
         />
-        <TextField
-          fullWidth
-          id="No HP"
-          label="No HP"
-          type="number"
-          variant="outlined"
-          onChange={(e) => setPhone(e.target.value)}
-          required
-        />
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+          }}>
+          <Typography
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              width: '50px',
+              height: '100%',
+              background: '#ff0032',
+              color: '#fff',
+              justifyContent: 'center',
+              borderRadius: '3px',
+            }}>
+            +62
+          </Typography>
+          <TextField
+            fullWidth
+            id="No HP"
+            label="No HP"
+            type="number"
+            variant="outlined"
+            onChange={(e) => setPhone(e.target.value)}
+            value={phone}
+            required
+          />
+        </Box>
+
         <TextField
           fullWidth
           id="email"
@@ -138,6 +190,7 @@ const FormReport = () => {
           type="email"
           variant="outlined"
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
           required
         />
         <Button
