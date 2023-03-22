@@ -16,6 +16,7 @@ import { loginCtx } from './context/LoginContext';
 import Layout from './layout';
 import Dashboard from './pages/Admin';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 import Report from './pages/Report';
 import Signup from './pages/Signup';
 
@@ -68,6 +69,16 @@ function App() {
               <Layout>
                 <RequireAuth>
                   <Report />
+                </RequireAuth>
+              </Layout>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Layout>
+                <RequireAuth>
+                  <Profile />
                 </RequireAuth>
               </Layout>
             }
