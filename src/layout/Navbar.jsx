@@ -14,7 +14,7 @@ import Signin from '../pages/Signin';
 import { loginCtx } from '../context/LoginContext';
 import Signoutbutton from '../components/Signoutbutton';
 
-const pages = ['Lapor', 'Tentang', 'Kontak'];
+const pages = ['Lapor', 'Tentang', 'Kontak', 'Riwayat'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -39,7 +39,7 @@ function ResponsiveAppBar() {
 
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{ bgcolor: '#FF0032', width: '100%' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>

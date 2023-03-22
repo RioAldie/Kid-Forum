@@ -157,12 +157,13 @@ const FormReport = () => {
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
+            gap: '10px',
           }}>
           <Typography
             sx={{
               display: 'flex',
               alignItems: 'center',
-              width: '50px',
+              width: { xs: '50px', md: '100px' },
               height: '100%',
               background: '#ff0032',
               color: '#fff',
@@ -177,7 +178,7 @@ const FormReport = () => {
             label="No HP"
             type="number"
             variant="outlined"
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => setPhone(`62${e.target.value}`)}
             value={phone}
             required
           />
