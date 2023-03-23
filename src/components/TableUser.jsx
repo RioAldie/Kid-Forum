@@ -14,7 +14,13 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../config';
-import { Box, Button, ButtonGroup, styled } from '@mui/material';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  styled,
+  Typography,
+} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
@@ -36,11 +42,8 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export default function UserReports() {
-  const [reportList, setReportList] = useState([]);
-  const [isChange, setIsChange] = useState(false);
-
-  const reportCollection = collection(db, 'reports');
+export default function UserReports(props) {
+  const { reports } = props;
 
   const CellStyled = styled(TableCell)({
     textAlign: 'center',
@@ -48,76 +51,52 @@ export default function UserReports() {
     maxWidth: 500,
   });
 
-  const handleDelete = async (id) => {
-    const reportDoc = doc(db, 'reports', id);
-
-    await deleteDoc(reportDoc).finally(() => setIsChange(!isChange));
-  };
-  const handleUpdate = async (id, status) => {
-    const reportDoc = doc(db, 'reports', id);
-
-    await updateDoc(reportDoc, { status: status }).finally(() =>
-      setIsChange(!isChange)
-    );
-  };
-
-  useEffect(() => {
-    const getReportList = async () => {
-      try {
-        const data = await getDocs(reportCollection);
-
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-
-        setReportList(filteredData);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getReportList();
-  }, [isChange]);
-
+  console.log(reports);
   return (
     <TableContainer
       component={Paper}
       sx={{ maxWidth: { xs: '100%', md: '80%' } }}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <CellStyled>Judul</CellStyled>
-            <CellStyled>Tanggal</CellStyled>
-            <CellStyled>Status</CellStyled>
-            <CellStyled>Isi</CellStyled>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {reportList.map((row, i) => (
-            <TableRow
-              key={i}
-              sx={{
-                '&:last-child td, &:last-child th': { border: 0 },
-              }}>
-              <CellStyled
-                component="th"
-                scope="row"
-                sx={{
-                  fontWeight: 600,
-                }}>
-                {row.title}
-              </CellStyled>
-              <CellStyled>{row.date}</CellStyled>
-              <CellStyled>
-                <StatusReport status={row.status} />
-              </CellStyled>
-              <CellStyled>
-                <ReportModal title={row.title} body={row.body} />
-              </CellStyled>
+      {reports != null && (
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <CellStyled>Judul</CellStyled>
+              <CellStyled>Tanggal</CellStyled>
+              <CellStyled>Status</CellStyled>
+              <CellStyled>Isi</CellStyled>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {reports.map((row, i) => {
+              return (
+                <TableRow
+                  key={i}
+                  sx={{
+                    '&:last-child td, &:last-child th': {
+                      border: 0,
+                    },
+                  }}>
+                  <CellStyled
+                    component="th"
+                    scope="row"
+                    sx={{
+                      fontWeight: 600,
+                    }}>
+                    {row.title}
+                  </CellStyled>
+                  <CellStyled>{row.date}</CellStyled>
+                  <CellStyled>
+                    <StatusReport status={row.status} />
+                  </CellStyled>
+                  <CellStyled>
+                    <ReportModal title={row.title} body={row.body} />
+                  </CellStyled>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      )}
     </TableContainer>
   );
 }
