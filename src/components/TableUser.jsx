@@ -21,26 +21,9 @@ import {
   styled,
   Typography,
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import EmailIcon from '@mui/icons-material/Email';
-import CheckIcon from '@mui/icons-material/Check';
-import DoNotDisturbIcon from '@mui/icons-material/DoNotDisturb';
-import BoxAction from './BoxAction';
+
 import StatusReport from './StatusReport';
 import ReportModal from './ReportModal';
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 export default function UserReports(props) {
   const { reports } = props;
@@ -59,11 +42,11 @@ export default function UserReports(props) {
       {reports != null && (
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
-            <TableRow>
-              <CellStyled>Judul</CellStyled>
-              <CellStyled>Tanggal</CellStyled>
-              <CellStyled>Status</CellStyled>
-              <CellStyled>Isi</CellStyled>
+            <TableRow sx={{ bgcolor: '#FF0032', color: '#fff' }}>
+              <CellStyled sx={{ color: '#fff' }}>Judul</CellStyled>
+              <CellStyled sx={{ color: '#fff' }}>Tanggal</CellStyled>
+              <CellStyled sx={{ color: '#fff' }}>Status</CellStyled>
+              <CellStyled sx={{ color: '#fff' }}>Isi</CellStyled>
             </TableRow>
           </TableHead>
           <TableBody>
