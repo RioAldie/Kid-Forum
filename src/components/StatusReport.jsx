@@ -4,7 +4,6 @@ import React from 'react';
 const StatusReport = (props) => {
   const { status } = props;
 
-  console.log(status);
   return (
     <Box>
       {status === 'pending' && (

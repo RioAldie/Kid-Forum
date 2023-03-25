@@ -9,12 +9,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Signin from '../pages/Signin';
 import { loginCtx } from '../context/LoginContext';
 import Signoutbutton from '../components/Signoutbutton';
 
-const pages = ['Lapor', 'Tentang', 'Kontak', 'Riwayat'];
+const pages = ['Home', 'Lapor', 'Tentang', 'Kontak'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -25,16 +25,9 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -75,9 +68,8 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
                 border: 'solid 1px #000',
               }}>
-              {pages.map((page) => (
+              <Link to={`/`}>
                 <MenuItem
-                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ textTransform: 'none' }}>
                   <Typography
@@ -87,10 +79,40 @@ function ResponsiveAppBar() {
                       fontWeight: '600',
                       textTransform: 'none',
                     }}>
-                    {page}
+                    home
                   </Typography>
                 </MenuItem>
-              ))}
+              </Link>
+              <Link to={`/profile`}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ textTransform: 'none' }}>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      textTransform: 'none',
+                    }}>
+                    aduan
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link to={`/`}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ textTransform: 'none' }}>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      textTransform: 'none',
+                    }}>
+                    lapor
+                  </Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
           <Box
@@ -131,29 +153,6 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
             {isLogin ? <Signoutbutton /> : <Signin />}
           </Box>
         </Toolbar>

@@ -17,6 +17,7 @@ import React, {
 import { db } from '../config';
 import { StatusCtx } from '../context/StatusContext';
 import AlertNotif from './AlertNotif';
+import Loading from './Loading';
 
 const FormReport = () => {
   const { status, setStatus } = useContext(StatusCtx);
@@ -38,7 +39,7 @@ const FormReport = () => {
       email,
       title,
       body,
-      phone,
+      phone: `62${phone}`,
       date: date,
       status: 'pending',
       uid: localStorage.getItem('user-active'),
@@ -94,6 +95,7 @@ const FormReport = () => {
         borderRadius: '8px',
       }}>
       <AlertNotif status={status} />
+      <Loading open={true} />
       <Typography
         variant="h6"
         sx={{
@@ -178,7 +180,7 @@ const FormReport = () => {
             label="No HP"
             type="number"
             variant="outlined"
-            onChange={(e) => setPhone(`62${e.target.value}`)}
+            onChange={(e) => setPhone(`${e.target.value}`)}
             value={phone}
             required
           />
