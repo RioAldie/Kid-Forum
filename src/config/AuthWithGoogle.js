@@ -6,8 +6,6 @@ import { loginCtx } from '../context/LoginContext';
 import GoogleButton from 'react-google-button';
 
 const AuthWithGoogle = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const { isLogin, setIsLogin } = useContext(loginCtx);
 
   const signInWIthGoogle = async () => {
@@ -25,7 +23,6 @@ const AuthWithGoogle = () => {
     }
   };
 
-  console.log(isLogin);
   return (
     <Box
       sx={{

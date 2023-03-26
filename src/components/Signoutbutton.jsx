@@ -2,25 +2,30 @@ import { Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { signOut } from 'firebase/auth';
 import { auth, googleProvider } from '../config';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { loginCtx } from '../context/LoginContext';
+import Loading from './Loading';
 
 const Signoutbutton = () => {
   const { isLogin, setIsLogin } = useContext(loginCtx);
+  const [isLoading, setIsLoading] = useState(false);
   const signOutWIthGoogle = async () => {
     try {
+      setIsLoading(true);
       await signOut(auth, googleProvider)
         .then((res) => {
           localStorage.removeItem('user-active');
+          localStorage.removeItem('user-email');
           setIsLogin(false);
         })
-        .finally(() => console.log('logout'));
+        .finally(() => setIsLoading(false));
     } catch (error) {
-      console.error(error);
+      setIsLoading(false);
     }
   };
   return (
     <Button variant="contained" onClick={(e) => signOutWIthGoogle()}>
+      <Loading open={isLoading} />
       <LogoutIcon />
       Keluar
     </Button>

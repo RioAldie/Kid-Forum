@@ -9,13 +9,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Signin from '../pages/Signin';
 import { loginCtx } from '../context/LoginContext';
 import Signoutbutton from '../components/Signoutbutton';
+import NavItem from '../components/NavItem';
 
-const pages = ['Lapor', 'Tentang', 'Kontak'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Home', 'Lapor', 'Kontak'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -25,21 +25,14 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{ bgcolor: '#FF0032', width: '100%' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -75,9 +68,8 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
                 border: 'solid 1px #000',
               }}>
-              {pages.map((page) => (
+              <Link to={`/`}>
                 <MenuItem
-                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ textTransform: 'none' }}>
                   <Typography
@@ -86,11 +78,44 @@ function ResponsiveAppBar() {
                       fontSize: '16px',
                       fontWeight: '600',
                       textTransform: 'none',
+                      color: '#000',
                     }}>
-                    {page}
+                    home
                   </Typography>
                 </MenuItem>
-              ))}
+              </Link>
+              <Link to={`/report`}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ textTransform: 'none' }}>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      textTransform: 'none',
+                      color: '#000',
+                    }}>
+                    lapor
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link to={`/profile`}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ textTransform: 'none' }}>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      textTransform: 'none',
+                      color: '#000',
+                    }}>
+                    riwayat
+                  </Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
           <Box
@@ -111,49 +136,12 @@ function ResponsiveAppBar() {
               justifyContent: 'center',
               gap: '50px',
             }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: 'white',
-                  display: 'block',
-                  textTransform: 'none',
-                  fontSize: '16px',
-                  '&hover': {
-                    borderBottom: 'solid 1px #fff',
-                  },
-                }}>
-                {page}
-              </Button>
-            ))}
+            <NavItem name={'Home'} target={'/'} />
+            <NavItem name={'Lapor'} target={'/report'} />
+            <NavItem name={'Riwayat'} target={'/profile'} />
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
             {isLogin ? <Signoutbutton /> : <Signin />}
           </Box>
         </Toolbar>
