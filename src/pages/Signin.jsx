@@ -16,6 +16,7 @@ import AuthWithGoogle from '../config/AuthWithGoogle';
 import AdminLogin from '../components/AdminLogin';
 import { loginCtx } from '../context/LoginContext';
 import { auth } from '../config';
+import Loading from '../components/Loading';
 
 const StyledModal = styled(Modal)({
   display: 'flex',
@@ -28,25 +29,32 @@ const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setIsLogin, setShow } = useContext(loginCtx);
+  const [isLoading, setIsLoading] = useState(false);
   const signInManual = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password).then(
-        (res) => {
-          console.log(res);
+      setIsLoading(true);
+      await signInWithEmailAndPassword(auth, email, password)
+        .then((res) => {
           localStorage.setItem(
             'user-active',
             JSON.stringify(res.user.uid)
           );
+          localStorage.setItem(
+            'user-email',
+            JSON.stringify(res.user.email)
+          );
           setIsLogin(true);
           setOpen(false);
-        }
-      );
+        })
+        .finally(() => setIsLoading(false));
     } catch (error) {
       setErr(true);
+      setIsLoading(false);
     }
   };
   return (
     <>
+      <Loading open={isLoading} />
       <Button variant="contained" onClick={(e) => setOpen(true)}>
         {' '}
         <AccountCircleIcon /> Login{' '}

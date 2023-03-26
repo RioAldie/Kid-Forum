@@ -13,9 +13,9 @@ import { Link, NavLink } from 'react-router-dom';
 import Signin from '../pages/Signin';
 import { loginCtx } from '../context/LoginContext';
 import Signoutbutton from '../components/Signoutbutton';
+import NavItem from '../components/NavItem';
 
-const pages = ['Home', 'Lapor', 'Tentang', 'Kontak'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Home', 'Lapor', 'Kontak'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -78,8 +78,25 @@ function ResponsiveAppBar() {
                       fontSize: '16px',
                       fontWeight: '600',
                       textTransform: 'none',
+                      color: '#000',
                     }}>
                     home
+                  </Typography>
+                </MenuItem>
+              </Link>
+              <Link to={`/report`}>
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  sx={{ textTransform: 'none' }}>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      textTransform: 'none',
+                      color: '#000',
+                    }}>
+                    lapor
                   </Typography>
                 </MenuItem>
               </Link>
@@ -93,23 +110,9 @@ function ResponsiveAppBar() {
                       fontSize: '16px',
                       fontWeight: '600',
                       textTransform: 'none',
+                      color: '#000',
                     }}>
-                    aduan
-                  </Typography>
-                </MenuItem>
-              </Link>
-              <Link to={`/`}>
-                <MenuItem
-                  onClick={handleCloseNavMenu}
-                  sx={{ textTransform: 'none' }}>
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      fontSize: '16px',
-                      fontWeight: '600',
-                      textTransform: 'none',
-                    }}>
-                    lapor
+                    riwayat
                   </Typography>
                 </MenuItem>
               </Link>
@@ -133,23 +136,9 @@ function ResponsiveAppBar() {
               justifyContent: 'center',
               gap: '50px',
             }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: 'white',
-                  display: 'block',
-                  textTransform: 'none',
-                  fontSize: '16px',
-                  '&hover': {
-                    borderBottom: 'solid 1px #fff',
-                  },
-                }}>
-                {page}
-              </Button>
-            ))}
+            <NavItem name={'Home'} target={'/'} />
+            <NavItem name={'Lapor'} target={'/report'} />
+            <NavItem name={'Riwayat'} target={'/profile'} />
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

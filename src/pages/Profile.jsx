@@ -1,13 +1,8 @@
-import {
-  Box,
-  Button,
-  styled,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box } from '@mui/material';
 import { collection, getDocs } from 'firebase/firestore';
 
 import { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
 
 import UserReports from '../components/TableUser';
 import { db } from '../config';
@@ -15,10 +10,12 @@ import { db } from '../config';
 export default function Profile() {
   const [reportList, setReportList] = useState([]);
   const userId = localStorage.getItem('user-active');
+  const [isLoading, setIsLoading] = useState(false);
   const reportCollection = collection(db, 'reports');
   useEffect(() => {
     const getReportList = async () => {
       try {
+        setIsLoading(true);
         const data = await getDocs(reportCollection);
 
         const filteredData = data.docs.map((doc) => ({
@@ -30,10 +27,11 @@ export default function Profile() {
           return userId == data.uid;
         });
 
-        console.log(userFiltered);
         setReportList(userFiltered);
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
+        setIsLoading(false);
       }
     };
 
@@ -42,6 +40,7 @@ export default function Profile() {
 
   return (
     <>
+      <Loading open={isLoading} />
       <Box
         sx={{
           width: '100%',

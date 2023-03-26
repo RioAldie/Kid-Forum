@@ -3,17 +3,11 @@ import {
   Box,
   Button,
   FormControl,
-  Modal,
   TextField,
   Typography,
 } from '@mui/material';
 import { addDoc, collection } from 'firebase/firestore';
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useContext, useState } from 'react';
 import { db } from '../config';
 import { StatusCtx } from '../context/StatusContext';
 import AlertNotif from './AlertNotif';
@@ -23,20 +17,21 @@ const FormReport = () => {
   const { status, setStatus } = useContext(StatusCtx);
   const [err, setErr] = useState(false);
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [phone, setPhone] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
+  const userEmail = JSON.parse(localStorage.getItem('user-email'));
   const handleStatus = () => {
-    // setStatus(!status);
     let day = new Date().getDate();
     let month = new Date().getMonth();
     let year = new Date().getFullYear();
     const date = `${day}-${month}-${year}`;
     const dataReport = {
       name,
-      email,
+      email: userEmail,
       title,
       body,
       phone: `62${phone}`,
@@ -53,7 +48,7 @@ const FormReport = () => {
   const resetForm = () => {
     setName('');
     setBody('');
-    setEmail('');
+
     setPhone('');
     setTitle('');
   };
@@ -64,17 +59,20 @@ const FormReport = () => {
         dataReport.title === '' ||
         dataReport.name === '' ||
         dataReport.body === '' ||
-        dataReport.phone === '' ||
-        dataReport.email === ''
+        dataReport.phone === ''
       ) {
         return setErr(true);
       }
-      await addDoc(reportsCollectionRef, dataReport).then((res) => {
-        setStatus(true);
-        resetForm();
-      });
+      setIsLoading(true);
+      await addDoc(reportsCollectionRef, dataReport)
+        .then((res) => {
+          setStatus(true);
+          resetForm();
+        })
+        .finally(() => setIsLoading(false));
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -95,7 +93,7 @@ const FormReport = () => {
         borderRadius: '8px',
       }}>
       <AlertNotif status={status} />
-      <Loading open={true} />
+      <Loading open={isLoading} />
       <Typography
         variant="h6"
         sx={{
@@ -191,9 +189,8 @@ const FormReport = () => {
           id="email"
           label="Email"
           type="email"
-          variant="outlined"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          variant="filled"
+          value={userEmail}
           required
         />
         <Button

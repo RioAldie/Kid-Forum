@@ -5,22 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  updateDoc,
-} from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { db } from '../config';
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  styled,
-  Typography,
-} from '@mui/material';
+import { styled } from '@mui/material';
 
 import StatusReport from './StatusReport';
 import ReportModal from './ReportModal';
@@ -34,7 +19,6 @@ export default function UserReports(props) {
     maxWidth: 500,
   });
 
-  console.log(reports);
   return (
     <TableContainer
       component={Paper}
