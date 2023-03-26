@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import AuthWithGoogle from '../config/AuthWithGoogle';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config';
+import Loading from '../components/Loading';
 
 const BoxStyled = styled(Box)({
   display: 'flex',
@@ -22,53 +23,38 @@ const BoxStyled = styled(Box)({
   height: 700,
   minWidth: '350px',
 });
-const NavBox = styled(Box)({
-  display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
+
 export default function SignupForm() {
-  const [value, setValue] = useState('guest');
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [gender, setGender] = useState('pria');
   const [notif, setNotif] = useState(false);
-
-  const genders = [
-    {
-      role: 'pria',
-      label: 'Pria',
-    },
-    {
-      role: 'wanita',
-      label: 'Wanita',
-    },
-  ];
+  const [err, setErr] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const signupWithEmail = async () => {
     try {
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      ).then((res) => {
-        console.log('user data: ', res.user.uid);
-      });
+      setIsLoading(true);
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((res) => {
+          setNotif(true);
+        })
+        .finally(() => setIsLoading(false));
     } catch (error) {
-      console.error(error);
+      setErr(true);
+      setIsLoading(false);
     }
   };
 
   return (
     <Box flex={0.5} p={2} justifyContent="center" alignItems="center">
+      <Loading open={isLoading} />
       <BoxStyled p={2}>
-        {!notif && (
+        {notif && (
           <Alert severity="success">
             Berhasil Daftar - silahkan Login
           </Alert>
         )}
+        {err && <Alert severity="error">Daftar Tidak Berhasil</Alert>}
         <Typography variant="h5" color={'primary'}>
           Daftar Akun
         </Typography>
@@ -90,20 +76,6 @@ export default function SignupForm() {
           variant="outlined"
           onChange={(e) => setPassword(e.target.value)}
         />
-        {/* <TextField
-          fullWidth
-          id="role"
-          select
-          label="Gender"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          helperText="Tolong pilih Gender anda">
-          {genders.map((role) => (
-            <MenuItem color="grey" key={role.role} value={role.role}>
-              {role.label}
-            </MenuItem>
-          ))}
-        </TextField> */}
         <Button
           fullWidth
           size="large"

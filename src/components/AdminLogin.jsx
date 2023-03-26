@@ -9,7 +9,6 @@ import { adminCtx } from '../context/AdminContext';
 
 const AdminLogin = () => {
   const [error, setError] = useState(false);
-  const { isLogin, setIsLogin } = useContext(loginCtx);
   const { setIsAdmin } = useContext(adminCtx);
   const navigate = useNavigate();
   const signInWIthGoogle = async () => {
@@ -17,7 +16,7 @@ const AdminLogin = () => {
       await signInWithPopup(auth, googleProvider).then((res) => {
         console.log(res.user.uid);
 
-        if (res.user.uid !== 'ln3hI9s6hQUvkmgxI9xsa9g7ugF3') {
+        if (res.user.uid !== 'enyZVoCsNwVbhYswZMQwM492Fbp2') {
           console.log('bukan admin');
           return setError(true);
         }

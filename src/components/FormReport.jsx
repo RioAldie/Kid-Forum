@@ -3,42 +3,38 @@ import {
   Box,
   Button,
   FormControl,
-  Modal,
   TextField,
   Typography,
 } from '@mui/material';
 import { addDoc, collection } from 'firebase/firestore';
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useContext, useState } from 'react';
 import { db } from '../config';
 import { StatusCtx } from '../context/StatusContext';
 import AlertNotif from './AlertNotif';
+import Loading from './Loading';
 
 const FormReport = () => {
   const { status, setStatus } = useContext(StatusCtx);
   const [err, setErr] = useState(false);
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [phone, setPhone] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
+  const userEmail = JSON.parse(localStorage.getItem('user-email'));
   const handleStatus = () => {
-    // setStatus(!status);
     let day = new Date().getDate();
     let month = new Date().getMonth();
     let year = new Date().getFullYear();
     const date = `${day}-${month}-${year}`;
     const dataReport = {
       name,
-      email,
+      email: userEmail,
       title,
       body,
-      phone,
+      phone: `62${phone}`,
       date: date,
       status: 'pending',
       uid: localStorage.getItem('user-active'),
@@ -52,7 +48,7 @@ const FormReport = () => {
   const resetForm = () => {
     setName('');
     setBody('');
-    setEmail('');
+
     setPhone('');
     setTitle('');
   };
@@ -63,17 +59,20 @@ const FormReport = () => {
         dataReport.title === '' ||
         dataReport.name === '' ||
         dataReport.body === '' ||
-        dataReport.phone === '' ||
-        dataReport.email === ''
+        dataReport.phone === ''
       ) {
         return setErr(true);
       }
-      await addDoc(reportsCollectionRef, dataReport).then((res) => {
-        setStatus(true);
-        resetForm();
-      });
+      setIsLoading(true);
+      await addDoc(reportsCollectionRef, dataReport)
+        .then((res) => {
+          setStatus(true);
+          resetForm();
+        })
+        .finally(() => setIsLoading(false));
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -94,6 +93,7 @@ const FormReport = () => {
         borderRadius: '8px',
       }}>
       <AlertNotif status={status} />
+      <Loading open={isLoading} />
       <Typography
         variant="h6"
         sx={{
@@ -178,7 +178,7 @@ const FormReport = () => {
             label="No HP"
             type="number"
             variant="outlined"
-            onChange={(e) => setPhone(`62${e.target.value}`)}
+            onChange={(e) => setPhone(`${e.target.value}`)}
             value={phone}
             required
           />
@@ -189,9 +189,8 @@ const FormReport = () => {
           id="email"
           label="Email"
           type="email"
-          variant="outlined"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          variant="filled"
+          value={userEmail}
           required
         />
         <Button
