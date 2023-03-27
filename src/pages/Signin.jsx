@@ -24,11 +24,10 @@ const StyledModal = styled(Modal)({
   justifyContent: 'center',
 });
 const Signin = () => {
-  const [open, setOpen] = useState(false);
   const [err, setErr] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setIsLogin, setShow } = useContext(loginCtx);
+  const { setIsLogin, setShow, show } = useContext(loginCtx);
   const [isLoading, setIsLoading] = useState(false);
   const signInManual = async () => {
     try {
@@ -44,7 +43,7 @@ const Signin = () => {
             JSON.stringify(res.user.email)
           );
           setIsLogin(true);
-          setOpen(false);
+          setShow(false);
         })
         .finally(() => setIsLoading(false));
     } catch (error) {
@@ -55,14 +54,14 @@ const Signin = () => {
   return (
     <>
       <Loading open={isLoading} />
-      <Button variant="contained" onClick={(e) => setOpen(true)}>
+      <Button variant="contained" onClick={(e) => setShow(true)}>
         {' '}
         <AccountCircleIcon /> Login{' '}
       </Button>
 
       <StyledModal
-        open={open}
-        onClose={(e) => setOpen(false)}
+        open={show}
+        onClose={(e) => setShow(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box
@@ -78,7 +77,7 @@ const Signin = () => {
             flexDirection: 'column',
             justifyContent: 'space-evenly',
           }}>
-          <Typography variant="h5">Halo Aduin</Typography>
+          <Typography variant="h5">Masuk Aduin</Typography>
           <TextField
             fullWidth
             id="email"
@@ -106,7 +105,12 @@ const Signin = () => {
           <AuthWithGoogle />
           <Typography variant="subtitle1">
             Belum Punya Akun?
-            <Link to={'/Signup'}>{' Sign Up'}</Link>
+            <Link
+              to={'/Signup'}
+              style={{ color: '#FF0032' }}
+              onClick={() => setShow(false)}>
+              {'Daftar disini'}
+            </Link>
           </Typography>
           <AdminLogin />
           {err && (

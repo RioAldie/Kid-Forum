@@ -26,6 +26,7 @@ import {
   secondaryListItems,
 } from '../components/ListItem';
 import BasicTable from '../components/Table';
+import Footer from '../layout/Footer';
 
 function Copyright(props) {
   return (
@@ -180,7 +181,7 @@ function DashboardContent() {
                 </Paper>
               </Grid>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
+            <Footer />
           </Container>
         </Box>
       </Box>

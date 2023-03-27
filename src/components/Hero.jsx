@@ -10,43 +10,68 @@ const Hero = () => {
         height: '600px',
         padding: '40px',
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'start',
+        flexDirection: 'row',
+        alignItems: 'center',
         width: '100%',
         borderBottom: '20px #F0A5B4 solid',
         borderBottomRightRadius: '80px',
-        gap: '30px',
+        gap: '50px',
+        justifyContent: 'space-around',
       }}>
-      <Typography
+      <Box
         sx={{
-          fontSize: '36px',
-          fontFamily: 'sans-serif',
-          fontWeight: '600',
-          lineBreak: '1',
-          width: { lg: '600px', sm: '90%', xs: '90%' },
-          maxHeight: '250px',
-          color: '#fff',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'start',
+          gap: '30px',
         }}>
-        Layanan Pengaduan Online{' '}
-        <span style={{ color: '#FFE351' }}>
-          Dinas Sosial PPPA Nganjuk
-        </span>
-      </Typography>
-      <Typography
+        <Typography
+          sx={{
+            fontSize: '36px',
+            fontFamily: 'sans-serif',
+            fontWeight: '600',
+            lineBreak: '1',
+            width: { lg: '600px', sm: '90%', xs: '90%' },
+            maxHeight: '250px',
+            color: '#fff',
+          }}>
+          Layanan Pengaduan Online{' '}
+          <span style={{ color: '#FFE351' }}>
+            Dinas Sosial PPPA Nganjuk
+          </span>
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: '18px',
+            fontFamily: 'sans-serif',
+            marginTop: '5px',
+            width: { lg: '600px', sm: '90%', xs: '80%' },
+            maxHeight: '101px',
+            color: '#fff',
+            fontWeight: '400',
+            lineHeight: '27px',
+          }}>
+          Ayo laporkan aduanmu kepada dinsos PPPA nganjuk secara
+          langsung dimanapun kamu berada.
+        </Typography>
+        <ButtonGoLapor />
+      </Box>
+      <Box
         sx={{
-          fontSize: '18px',
-          fontFamily: 'sans-serif',
-          marginTop: '5px',
-          width: { lg: '600px', sm: '90%', xs: '80%' },
-          maxHeight: '101px',
-          color: '#fff',
-          fontWeight: '400',
-          lineHeight: '27px',
+          display: {
+            sm: 'none',
+            xs: 'none',
+            lg: 'block',
+            md: 'block',
+          },
         }}>
-        ayo laporkan keluhanmu kepada dinsos nganjuk secara langsung
-        dimanapun kamu berada
-      </Typography>
-      <ButtonGoLapor />
+        <img
+          src="/images/hero-aduin.png"
+          alt="anak-anak indonesia"
+          width={550}
+          height={400}
+        />
+      </Box>
     </Box>
   );
 };
