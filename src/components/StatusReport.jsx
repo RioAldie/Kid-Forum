@@ -25,7 +25,7 @@ const StatusReport = (props) => {
             fontWeight: '600',
             textTransform: 'uppercase',
           }}>
-          Selesai
+          Terima
         </Typography>
       )}
       {status === 'tolak' && (

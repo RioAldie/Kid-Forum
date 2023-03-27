@@ -87,7 +87,7 @@ const Footer = () => {
           marginTop: '20px',
           textAlign: 'center',
         }}>
-        © 2019 Copyright All Reversed
+        © 2023 Copyright All Reversed
       </Typography>
     </Box>
   );

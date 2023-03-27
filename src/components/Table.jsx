@@ -74,6 +74,7 @@ export default function BasicTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
+            <CellStyled>No</CellStyled>
             <CellStyled>Judul</CellStyled>
             <CellStyled>Nama</CellStyled>
             <CellStyled>Email</CellStyled>
@@ -92,6 +93,7 @@ export default function BasicTable() {
               sx={{
                 '&:last-child td, &:last-child th': { border: 0 },
               }}>
+              <CellStyled>{i + 1}</CellStyled>
               <CellStyled
                 component="th"
                 scope="row"

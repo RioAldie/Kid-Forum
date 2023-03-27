@@ -1,11 +1,26 @@
 import { Button } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { useNavigate } from 'react-router-dom';
+import { loginCtx } from '../context/LoginContext';
 
 const ButtonGoRed = () => {
+  const { isLogin, setShow } = useContext(loginCtx);
+  const navigate = useNavigate();
+
+  const gotoReport = () => {
+    if (isLogin) {
+      return navigate('/report');
+    }
+
+    if (!isLogin) {
+      return setShow(true);
+    }
+  };
   return (
     <Button
       variant="contained"
+      onClick={() => gotoReport()}
       sx={{
         bgcolor: '#DE002C',
         color: '#fff',

@@ -56,7 +56,7 @@ export default function SignupForm() {
         )}
         {err && <Alert severity="error">Daftar Tidak Berhasil</Alert>}
         <Typography variant="h5" color={'primary'}>
-          Daftar Akun
+          Daftar Aduin
         </Typography>
 
         <TextField
