@@ -49,9 +49,8 @@ const Feature = () => {
           );
         })}
       </Box>
-      <Link to={'/report'}>
-        <ButtonGoRed />
-      </Link>
+
+      <ButtonGoRed />
     </Box>
   );
 };

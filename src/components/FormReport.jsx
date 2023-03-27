@@ -26,7 +26,7 @@ const FormReport = () => {
   const userEmail = JSON.parse(localStorage.getItem('user-email'));
   const handleStatus = () => {
     let day = new Date().getDate();
-    let month = new Date().getMonth();
+    let month = new Date().getMonth() + 1;
     let year = new Date().getFullYear();
     const date = `${day}-${month}-${year}`;
     const dataReport = {
