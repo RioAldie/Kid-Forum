@@ -10,7 +10,7 @@ const ButtonGoRed = () => {
 
   const gotoReport = () => {
     if (isLogin) {
-      return navigate('/report');
+      return navigate('/report#form-report');
     }
 
     if (!isLogin) {

@@ -3,6 +3,9 @@ import {
   Box,
   Button,
   FormControl,
+  MenuItem,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from '@mui/material';
@@ -17,11 +20,17 @@ const FormReport = () => {
   const { status, setStatus } = useContext(StatusCtx);
   const [err, setErr] = useState(false);
   const [name, setName] = useState('');
-
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('female');
   const [isLoading, setIsLoading] = useState(false);
+  const [age, setAge] = useState(0);
+  const [job, setJob] = useState('');
+  const [adrress, setAdrress] = useState('');
+  const [degree, setDegree] = useState('');
+  const [location, setLocation] = useState('');
+  const [relation, setRelation] = useState('');
 
   const userEmail = JSON.parse(localStorage.getItem('user-email'));
   const handleStatus = () => {
@@ -38,9 +47,15 @@ const FormReport = () => {
       date: date,
       status: 'pending',
       uid: localStorage.getItem('user-active'),
+      adrress,
+      age,
+      degree,
+      location,
+      relation,
+      gender,
     };
-
-    handleSubmitReport(dataReport);
+    console.log('report: ', dataReport);
+    // handleSubmitReport(dataReport);
   };
 
   const reportsCollectionRef = collection(db, 'reports');
@@ -52,7 +67,27 @@ const FormReport = () => {
     setPhone('');
     setTitle('');
   };
-
+  const titles = [
+    'Kekerasan Fisik',
+    'Serangan Psikis',
+    'Kekerasan Seksual',
+    'Kasus Ekploitasi',
+    'Penelantaran Anak',
+    'Lainnya',
+  ];
+  const degrees = [
+    'SD/MI',
+    'SMP sederajat',
+    'SMA sederajat',
+    'D3/Sarjana',
+  ];
+  const jobs = [
+    'Pegawai',
+    'Wiraswasta',
+    'Wirausaha',
+    'Belum Bekerja',
+    'Lainnya',
+  ];
   const handleSubmitReport = async (dataReport) => {
     try {
       if (
@@ -88,10 +123,11 @@ const FormReport = () => {
         flexDirection: 'column',
         gap: '20px',
         marginTop: '50px',
-        height: '700px',
+        height: '1200px',
         padding: '10px',
         borderRadius: '8px',
-      }}>
+      }}
+      id="form-report">
       <AlertNotif status={status} />
       <Loading open={isLoading} />
       <Typography
@@ -133,14 +169,82 @@ const FormReport = () => {
         />
         <TextField
           fullWidth
-          id="title"
-          label="Judul Laporan / Tema Laporan"
-          type="text"
+          id="age"
+          label="Umur"
+          type="number"
           variant="outlined"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
+          onChange={(e) => setAge(e.target.value)}
+          value={age}
           required
         />
+        <RadioGroup
+          defaultValue="female"
+          name="controlled-radio-buttons-group"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+          sx={{
+            my: 1,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingLeft: '20px',
+          }}>
+          <Typography>Gender :</Typography>
+          <Radio value="female" sx={{ color: '#000' }} />
+          <Typography>Wanita</Typography>
+          <Radio value="male" />
+          <Typography>Pria</Typography>
+        </RadioGroup>
+        <TextField
+          fullWidth
+          id="adrress"
+          label="Alamat"
+          type="text"
+          variant="outlined"
+          onChange={(e) => setAdrress(e.target.value)}
+          value={adrress}
+          required
+        />
+        <TextField
+          fullWidth
+          id="role"
+          select
+          label="Tema Laporan"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          helperText="Pilih Tema Laporanmu">
+          {titles.map((role, i) => (
+            <MenuItem color="grey" key={i} value={role}>
+              {role}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          fullWidth
+          id="degree"
+          select
+          label="Pendidikan Terakhir"
+          value={degree}
+          onChange={(e) => setDegree(e.target.value)}>
+          {degrees.map((degree, i) => (
+            <MenuItem color="grey" key={i} value={degree}>
+              {degree}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          fullWidth
+          id="degree"
+          select
+          label="Pekerjaan"
+          value={job}
+          onChange={(e) => setJob(e.target.value)}>
+          {jobs.map((job, i) => (
+            <MenuItem color="grey" key={i} value={job}>
+              {job}
+            </MenuItem>
+          ))}
+        </TextField>
         <TextField
           id="outline-basic"
           label="Isi Laporan anda"
@@ -151,6 +255,25 @@ const FormReport = () => {
           onChange={(e) => setBody(e.target.value)}
           value={body}
           required
+        />
+        <TextField
+          fullWidth
+          id="location"
+          label="Tempat Kejadian"
+          type="text"
+          variant="outlined"
+          onChange={(e) => setLocation(e.target.value)}
+          value={location}
+          required
+        />
+        <TextField
+          fullWidth
+          id="Relation"
+          label="Hubungan anda dengan Tersangka/Korban"
+          type="text"
+          variant="outlined"
+          onChange={(e) => setRelation(e.target.value)}
+          value={relation}
         />
         <Box
           sx={{
@@ -196,7 +319,7 @@ const FormReport = () => {
         <Button
           variant="contained"
           sx={{
-            height: '50px',
+            height: '70px',
           }}
           onClick={() => handleStatus()}>
           Lapor!

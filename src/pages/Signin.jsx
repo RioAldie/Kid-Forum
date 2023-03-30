@@ -8,10 +8,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useContext, useEffect, useReducer, useState } from 'react';
+import { useContext, useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthWithGoogle from '../config/AuthWithGoogle';
 import AdminLogin from '../components/AdminLogin';
 import { loginCtx } from '../context/LoginContext';
@@ -54,9 +54,13 @@ const Signin = () => {
   return (
     <>
       <Loading open={isLoading} />
-      <Button variant="contained" onClick={(e) => setShow(true)}>
+      <Button
+        variant="contained"
+        color="warning"
+        sx={{ bgcolor: '#FAFF0B', color: '#FF0032' }}
+        onClick={(e) => setShow(true)}>
         {' '}
-        <AccountCircleIcon /> Login{' '}
+        <AccountCircleIcon /> Masuk{' '}
       </Button>
 
       <StyledModal

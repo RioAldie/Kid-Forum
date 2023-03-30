@@ -24,7 +24,14 @@ const Signoutbutton = () => {
     }
   };
   return (
-    <Button variant="contained" onClick={(e) => signOutWIthGoogle()}>
+    <Button
+      variant="contained"
+      color="warning"
+      sx={{
+        bgcolor: '#FAFF0B',
+        color: '#FF0032',
+      }}
+      onClick={(e) => signOutWIthGoogle()}>
       <Loading open={isLoading} />
       <LogoutIcon />
       Keluar
