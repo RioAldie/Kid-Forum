@@ -28,7 +28,7 @@ const Signoutbutton = () => {
       variant="contained"
       color="warning"
       sx={{
-        bgcolor: '#FAFF0B',
+        bgcolor: '#fff',
         color: '#FF0032',
       }}
       onClick={(e) => signOutWIthGoogle()}>

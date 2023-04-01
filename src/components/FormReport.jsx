@@ -25,9 +25,9 @@ const FormReport = () => {
   const [phone, setPhone] = useState('');
   const [gender, setGender] = useState('female');
   const [isLoading, setIsLoading] = useState(false);
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState(1);
   const [job, setJob] = useState('');
-  const [adrress, setAdrress] = useState('');
+  const [adress, setAdrress] = useState('');
   const [degree, setDegree] = useState('');
   const [location, setLocation] = useState('');
   const [relation, setRelation] = useState('');
@@ -37,6 +37,7 @@ const FormReport = () => {
     let day = new Date().getDate();
     let month = new Date().getMonth() + 1;
     let year = new Date().getFullYear();
+    let dates = new Date().getTime();
     const date = `${day}-${month}-${year}`;
     const dataReport = {
       name,
@@ -47,15 +48,19 @@ const FormReport = () => {
       date: date,
       status: 'pending',
       uid: localStorage.getItem('user-active'),
-      adrress,
+      adress,
       age,
       degree,
       location,
       relation,
       gender,
+      job,
+      index: dates,
     };
     console.log('report: ', dataReport);
-    // handleSubmitReport(dataReport);
+
+    console.log('index', dates);
+    handleSubmitReport(dataReport);
   };
 
   const reportsCollectionRef = collection(db, 'reports');
@@ -73,6 +78,7 @@ const FormReport = () => {
     'Kekerasan Seksual',
     'Kasus Ekploitasi',
     'Penelantaran Anak',
+    'Pembullyan',
     'Lainnya',
   ];
   const degrees = [
@@ -86,6 +92,7 @@ const FormReport = () => {
     'Wiraswasta',
     'Wirausaha',
     'Belum Bekerja',
+    'Pelajar',
     'Lainnya',
   ];
   const handleSubmitReport = async (dataReport) => {
@@ -202,7 +209,7 @@ const FormReport = () => {
           type="text"
           variant="outlined"
           onChange={(e) => setAdrress(e.target.value)}
-          value={adrress}
+          value={adress}
           required
         />
         <TextField

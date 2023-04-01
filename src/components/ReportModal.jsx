@@ -21,7 +21,7 @@ export default function ReportModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { title, body } = props;
+  const { title, body, name, location } = props;
 
   return (
     <div>

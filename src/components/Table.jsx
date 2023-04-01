@@ -22,10 +22,8 @@ import BoxAction from './BoxAction';
 import StatusReport from './StatusReport';
 import ReportModal from './ReportModal';
 import Loading from './Loading';
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+import ClientModal from './ClientModal';
+import PaginationRounded from './Pagination';
 
 export default function BasicTable() {
   const [reportList, setReportList] = useState([]);
@@ -54,6 +52,13 @@ export default function BasicTable() {
       .then(() => setIsChange(!isChange))
       .finally(() => setIsLoading(false));
   };
+  const sortingDataByNewest = (data) => {
+    const sorted = data.sort(
+      (a, b) => parseFloat(b.index) - parseFloat(a.index)
+    );
+
+    setReportList(sorted);
+  };
 
   useEffect(() => {
     const getReportList = async () => {
@@ -65,7 +70,9 @@ export default function BasicTable() {
           id: doc.id,
         }));
 
-        setReportList(filteredData);
+        console.log(filteredData);
+
+        sortingDataByNewest(filteredData);
       } catch (err) {
         console.error(err);
       }
@@ -81,17 +88,17 @@ export default function BasicTable() {
           <TableRow>
             <CellStyled>No</CellStyled>
             <CellStyled>Judul</CellStyled>
-            <CellStyled>Nama</CellStyled>
-            <CellStyled>Email</CellStyled>
-            <CellStyled>Telepon</CellStyled>
-            <CellStyled>Tanggal</CellStyled>
+            <CellStyled>Biodata</CellStyled>
             <CellStyled>Status</CellStyled>
             <CellStyled>Isi</CellStyled>
             <CellStyled>Action</CellStyled>
             <CellStyled>Tanggapi</CellStyled>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody
+          sx={{
+            flexDirection: 'column-reverse',
+          }}>
           {reportList.map((row, i) => (
             <TableRow
               key={i}
@@ -107,10 +114,9 @@ export default function BasicTable() {
                 }}>
                 {row.title}
               </CellStyled>
-              <CellStyled>{row.name}</CellStyled>
-              <CellStyled>{row.email}</CellStyled>
-              <CellStyled>{row.phone}</CellStyled>
-              <CellStyled>{row.date}</CellStyled>
+              <CellStyled>
+                <ClientModal props={row} />
+              </CellStyled>
               <CellStyled>
                 <StatusReport status={row.status} />
               </CellStyled>
@@ -154,7 +160,7 @@ export default function BasicTable() {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Table>{' '}
     </TableContainer>
   );
 }

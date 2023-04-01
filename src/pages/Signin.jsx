@@ -57,7 +57,7 @@ const Signin = () => {
       <Button
         variant="contained"
         color="warning"
-        sx={{ bgcolor: '#FAFF0B', color: '#FF0032' }}
+        sx={{ bgcolor: '#FFF', color: '#FF0032' }}
         onClick={(e) => setShow(true)}>
         {' '}
         <AccountCircleIcon /> Masuk{' '}
@@ -65,7 +65,7 @@ const Signin = () => {
 
       <StyledModal
         open={show}
-        onClose={(e) => setShow(false)}
+        onClose={() => setShow(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box
