@@ -26,23 +26,28 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function UserDetailCard() {
+export default function UserDetailCard(props) {
+  const { date, name, body, title } = props;
   return (
     <Card sx={{ maxWidth: '100%' }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+          <Avatar sx={{ bgcolor: '#2196f3' }} aria-label="recipe">
+            {name[0]}
           </Avatar>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={name}
+        subheader={date}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun
-          meal to cook together with your guests. Add 1 cup of frozen
-          peas along with the mussels, if you like.
+        <Typography variant="h6">{title}</Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            fontSize: '18px',
+          }}>
+          {body}
         </Typography>
       </CardContent>
     </Card>

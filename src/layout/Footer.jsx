@@ -13,7 +13,7 @@ const Footer = () => {
         minHeight: '300px',
         marginTop: '100px',
         bgcolor: '#FF0032',
-        borderTop: '20px #F0A5B4 solid',
+        borderTop: '20px #BE0025 solid',
         borderTopLeftRadius: '80px',
         display: 'flex',
         flexDirection: {

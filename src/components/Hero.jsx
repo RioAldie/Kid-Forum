@@ -13,7 +13,7 @@ const Hero = () => {
         flexDirection: 'row',
         alignItems: 'center',
         width: '100%',
-        borderBottom: '20px #F0A5B4 solid',
+        borderBottom: '20px #BE0025 solid',
         borderBottomRightRadius: '80px',
         gap: '50px',
         justifyContent: 'space-around',

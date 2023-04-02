@@ -197,9 +197,9 @@ const FormReport = () => {
             paddingLeft: '20px',
           }}>
           <Typography>Gender :</Typography>
-          <Radio value="female" sx={{ color: '#000' }} />
+          <Radio value="wanita" sx={{ color: '#000' }} />
           <Typography>Wanita</Typography>
-          <Radio value="male" />
+          <Radio value="pria" />
           <Typography>Pria</Typography>
         </RadioGroup>
         <TextField
@@ -305,7 +305,7 @@ const FormReport = () => {
           <TextField
             fullWidth
             id="No HP"
-            label="No HP"
+            label="No. HP/WA"
             type="number"
             variant="outlined"
             onChange={(e) => setPhone(`${e.target.value}`)}

@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import UserDetailCard from './CardDetailUser';
 
 const style = {
   position: 'absolute',
@@ -21,7 +22,7 @@ export default function ReportModal(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { title, body, name, location } = props;
+  const { title, body, name, location, date } = props;
 
   return (
     <div>
@@ -32,15 +33,12 @@ export default function ReportModal(props) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2">
-            {title}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {body}
-          </Typography>
+          <UserDetailCard
+            date={date}
+            name={name}
+            body={body}
+            title={title}
+          />
         </Box>
       </Modal>
     </div>

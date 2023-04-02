@@ -70,8 +70,6 @@ export default function BasicTable() {
           id: doc.id,
         }));
 
-        console.log(filteredData);
-
         sortingDataByNewest(filteredData);
       } catch (err) {
         console.error(err);
@@ -121,7 +119,12 @@ export default function BasicTable() {
                 <StatusReport status={row.status} />
               </CellStyled>
               <CellStyled>
-                <ReportModal title={row.title} body={row.body} />
+                <ReportModal
+                  title={row.title}
+                  body={row.body}
+                  date={row.date}
+                  name={row.name}
+                />
               </CellStyled>
               <CellStyled>
                 <BoxAction phone={row.phone} email={row.email} />

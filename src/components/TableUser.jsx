@@ -56,7 +56,12 @@ export default function UserReports(props) {
                     <StatusReport status={row.status} />
                   </CellStyled>
                   <CellStyled>
-                    <ReportModal title={row.title} body={row.body} />
+                    <ReportModal
+                      title={row.title}
+                      body={row.body}
+                      date={row.date}
+                      name={row.name}
+                    />
                   </CellStyled>
                 </TableRow>
               );
