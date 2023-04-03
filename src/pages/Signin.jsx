@@ -81,7 +81,14 @@ const Signin = () => {
             flexDirection: 'column',
             justifyContent: 'space-evenly',
           }}>
-          <Typography variant="h5">Masuk Aduin</Typography>
+          <Typography variant="h5">Masuk</Typography>
+          {err && (
+            <Stack sx={{ width: '100%' }}>
+              <Alert severity="error">
+                Email atau Password Salah
+              </Alert>
+            </Stack>
+          )}
           <TextField
             fullWidth
             id="email"
@@ -117,13 +124,6 @@ const Signin = () => {
             </Link>
           </Typography>
           <AdminLogin />
-          {err && (
-            <Stack sx={{ width: '100%' }}>
-              <Alert severity="error">
-                Email atau Password Salah
-              </Alert>
-            </Stack>
-          )}
         </Box>
       </StyledModal>
     </>
