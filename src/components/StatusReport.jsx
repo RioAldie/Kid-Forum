@@ -8,7 +8,7 @@ const StatusReport = (props) => {
     <Box>
       {status === 'pending' && (
         <Typography
-          color={'#FFD80B'}
+          color={'#FFAC0B'}
           sx={{
             fontSize: '16px',
             fontWeight: '600',

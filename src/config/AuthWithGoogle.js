@@ -16,6 +16,10 @@ const AuthWithGoogle = () => {
           'user-active',
           JSON.stringify(res.user.uid)
         );
+        localStorage.setItem(
+          'user-email',
+          JSON.stringify(res.user.email)
+        );
         setIsLogin(true);
       });
     } catch (error) {

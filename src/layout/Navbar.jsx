@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,20 +6,19 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+
 import MenuItem from '@mui/material/MenuItem';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Signin from '../pages/Signin';
 import { loginCtx } from '../context/LoginContext';
 import Signoutbutton from '../components/Signoutbutton';
 import NavItem from '../components/NavItem';
-
-const pages = ['Home', 'Lapor', 'Kontak'];
+import { useState } from 'react';
+import { useContext } from 'react';
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { isLogin } = React.useContext(loginCtx);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const { isLogin } = useContext(loginCtx);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -122,9 +120,9 @@ function ResponsiveAppBar() {
             sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}>
             <Link to="/">
               <img
-                src="/images/aduin-logo.png"
-                width={67}
-                height={25}
+                src="/icons/lapak-logo-3.svg"
+                width={167}
+                height={85}
                 alt="logo"
               />
             </Link>

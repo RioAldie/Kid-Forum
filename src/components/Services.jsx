@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import React from 'react';
 import dataService from '../services/layanan';
 import CardService from './CardService';
@@ -13,6 +13,7 @@ const Services = () => {
         flexFlow: 'column',
         gap: '30px',
         alignItems: 'center',
+        py: '20px',
       }}>
       <Box
         sx={{

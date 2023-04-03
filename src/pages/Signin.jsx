@@ -8,10 +8,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useContext, useEffect, useReducer, useState } from 'react';
+import { useContext, useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthWithGoogle from '../config/AuthWithGoogle';
 import AdminLogin from '../components/AdminLogin';
 import { loginCtx } from '../context/LoginContext';
@@ -54,14 +54,18 @@ const Signin = () => {
   return (
     <>
       <Loading open={isLoading} />
-      <Button variant="contained" onClick={(e) => setShow(true)}>
+      <Button
+        variant="contained"
+        color="warning"
+        sx={{ bgcolor: '#FFF', color: '#FF0032' }}
+        onClick={(e) => setShow(true)}>
         {' '}
-        <AccountCircleIcon /> Login{' '}
+        <AccountCircleIcon /> Masuk{' '}
       </Button>
 
       <StyledModal
         open={show}
-        onClose={(e) => setShow(false)}
+        onClose={() => setShow(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box
@@ -77,7 +81,14 @@ const Signin = () => {
             flexDirection: 'column',
             justifyContent: 'space-evenly',
           }}>
-          <Typography variant="h5">Masuk Aduin</Typography>
+          <Typography variant="h5">Masuk</Typography>
+          {err && (
+            <Stack sx={{ width: '100%' }}>
+              <Alert severity="error">
+                Email atau Password Salah
+              </Alert>
+            </Stack>
+          )}
           <TextField
             fullWidth
             id="email"
@@ -113,13 +124,6 @@ const Signin = () => {
             </Link>
           </Typography>
           <AdminLogin />
-          {err && (
-            <Stack sx={{ width: '100%' }}>
-              <Alert severity="error">
-                Email atau Password Salah
-              </Alert>
-            </Stack>
-          )}
         </Box>
       </StyledModal>
     </>
