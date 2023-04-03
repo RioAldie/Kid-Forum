@@ -1,15 +1,13 @@
 import {
   Alert,
-  AppBar,
   Box,
   Button,
   Link,
-  MenuItem,
   styled,
   TextField,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AuthWithGoogle from '../config/AuthWithGoogle';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config';

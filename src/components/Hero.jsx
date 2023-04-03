@@ -13,7 +13,7 @@ const Hero = () => {
         flexDirection: 'row',
         alignItems: 'center',
         width: '100%',
-        borderBottom: '20px #F0A5B4 solid',
+        borderBottom: '20px #BE0025 solid',
         borderBottomRightRadius: '80px',
         gap: '50px',
         justifyContent: 'space-around',
@@ -35,9 +35,9 @@ const Hero = () => {
             maxHeight: '250px',
             color: '#fff',
           }}>
-          Layanan Pengaduan Online{' '}
+          Laporan Penanganan Aduan{' '}
           <span style={{ color: '#FFE351' }}>
-            Dinas Sosial PPPA Nganjuk
+            Kasus Kekerasan Terhadap Perempuan dan Anak
           </span>
         </Typography>
         <Typography
@@ -51,7 +51,7 @@ const Hero = () => {
             fontWeight: '400',
             lineHeight: '27px',
           }}>
-          Ayo laporkan aduanmu kepada dinsos PPPA nganjuk secara
+          Ayo laporkan aduanmu kepada dinsos PPPA Nganjuk secara
           langsung dimanapun kamu berada.
         </Typography>
         <ButtonGoLapor />

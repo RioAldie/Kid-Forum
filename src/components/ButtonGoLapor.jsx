@@ -10,7 +10,7 @@ const ButtonGoLapor = () => {
   const navigate = useNavigate();
   const gotoReport = () => {
     if (isLogin) {
-      return navigate('/report');
+      return navigate('/report#form-report');
     }
     if (!isLogin) {
       return setShow(true);

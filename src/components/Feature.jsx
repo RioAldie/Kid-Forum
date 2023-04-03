@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 import CardFeature from './CardFeature';
 import datasFeature from '../services/features';
@@ -28,11 +28,11 @@ const Feature = () => {
         color="primary">
         Alur Pengaduan
       </Typography>
-      <Box
+      <Paper
         sx={{
           width: '80%',
           minHeight: '200px',
-          border: 'solid 2px #F0A5B4',
+
           display: 'flex',
           flexDirection: 'row',
           gap: '10px',
@@ -42,13 +42,14 @@ const Feature = () => {
           mt: '50px',
           borderRadius: '8px',
           py: '20px',
-        }}>
+        }}
+        elevation={2}>
         {datasFeature.map((data, i) => {
           return (
             <CardFeature name={data.name} icon={data.icon} key={i} />
           );
         })}
-      </Box>
+      </Paper>
 
       <ButtonGoRed />
     </Box>
