@@ -23,7 +23,6 @@ import StatusReport from './StatusReport';
 import ReportModal from './ReportModal';
 import Loading from './Loading';
 import ClientModal from './ClientModal';
-import PaginationRounded from './Pagination';
 import Recaption from './Recaption';
 
 export default function BasicTable() {
@@ -163,7 +162,7 @@ export default function BasicTable() {
                 </ButtonGroup>
               </CellStyled>
               <CellStyled>
-                <Recaption />
+                <Recaption recap={row.recapList} />
               </CellStyled>
             </TableRow>
           ))}

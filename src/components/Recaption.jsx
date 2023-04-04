@@ -16,10 +16,11 @@ const style = {
   p: 4,
 };
 
-export default function Recaption() {
+export default function Recaption(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { recap } = props;
 
   return (
     <Box>
@@ -30,7 +31,7 @@ export default function Recaption() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={style}>
-          <RecapCheck />
+          <RecapCheck recaption={recap} />
         </Box>
       </Modal>
     </Box>
