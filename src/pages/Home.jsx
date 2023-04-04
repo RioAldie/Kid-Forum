@@ -1,11 +1,9 @@
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import Feature from '../components/Feature';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Sticker from '../components/Sticker';
-import Footer from '../layout/Footer';
-import ResponsiveAppBar from '../layout/Navbar';
 
 const Home = () => {
   return (

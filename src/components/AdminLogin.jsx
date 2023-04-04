@@ -4,7 +4,6 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../config';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginCtx } from '../context/LoginContext';
 import { adminCtx } from '../context/AdminContext';
 
 const AdminLogin = () => {
@@ -14,19 +13,23 @@ const AdminLogin = () => {
   const signInWIthGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider).then((res) => {
-        if (res.user.uid !== 'enyZVoCsNwVbhYswZMQwM492Fbp2') {
-          console.log('bukan admin');
-          return setError(true);
+        if (
+          res.user.uid === 'oEwShCczjleSZvyIFLtpbLXhw513' ||
+          res.user.uid === 'enyZVoCsNwVbhYswZMQwM492Fbp2' ||
+          res.user.uid === '5e0pqlYXCyWvD1LSIsUmrv76nix1'
+        ) {
+          localStorage.setItem(
+            'admin-active',
+            JSON.stringify(res.user.uid)
+          );
+          setIsAdmin(true);
+          navigate('../admin', { replace: true });
         }
-        localStorage.setItem(
-          'admin-active',
-          JSON.stringify(res.user.uid)
-        );
-        setIsAdmin(true);
-        navigate('../admin', { replace: true });
+        return setError(true);
       });
     } catch (error) {
       console.error(error);
+      return setError(true);
     }
   };
 

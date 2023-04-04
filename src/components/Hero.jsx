@@ -27,10 +27,10 @@ const Hero = () => {
         }}>
         <Typography
           sx={{
-            fontSize: '36px',
+            fontSize: { xs: 30, sm: 30, md: 36 },
             fontFamily: 'sans-serif',
             fontWeight: '600',
-            lineBreak: '1',
+            lineBreak: { xs: 0, sm: 0, md: 1 },
             width: { lg: '600px', sm: '90%', xs: '90%' },
             maxHeight: '250px',
             color: '#fff',
@@ -66,10 +66,10 @@ const Hero = () => {
           },
         }}>
         <img
-          src="/images/hero-aduin.png"
+          src="/images/thum-lapak.png"
           alt="anak-anak indonesia"
-          width={550}
-          height={400}
+          width={582}
+          height={562}
         />
       </Box>
     </Box>
