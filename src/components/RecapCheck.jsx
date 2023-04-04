@@ -2,56 +2,42 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import RecapItem from './RecapItem';
 
 export default function RecapCheck() {
-  const [checked, setChecked] = React.useState([true, false]);
-  const recap = [
-    { name: 'tes1', isCheck: false },
+  let recapList = [
+    { name: 'tes1', isCheck: true },
     { name: 'tes2', isCheck: false },
     { name: 'tes3', isCheck: false },
   ];
-  const handleChange1 = (event) => {
-    setChecked([event.target.checked, event.target.checked]);
-  };
+  const [isChange, setIsChange] = React.useState(false);
+  const [dataRecap, setDataRecap] = React.useState(recapList);
 
-  const handleChange2 = (event) => {
-    setChecked([event.target.checked, checked[1]]);
-  };
+  const handleChange = async (event, label, value) => {
+    let newObj = dataRecap;
+    let getIndex = newObj.findIndex((obj) => obj.name === label);
 
-  const handleChange3 = (event) => {
-    setChecked([checked[0], event.target.checked]);
-  };
+    newObj[getIndex].isCheck = value;
 
-  const children = (
-    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-      <FormControlLabel
-        label="Child 1"
-        control={
-          <Checkbox checked={checked[0]} onChange={handleChange2} />
-        }
-      />
-      <FormControlLabel
-        label="Child 2"
-        control={
-          <Checkbox checked={checked[1]} onChange={handleChange3} />
-        }
-      />
-    </Box>
-  );
+    setDataRecap(newObj);
+    setIsChange(!isChange);
+  };
 
   return (
-    <div>
-      <FormControlLabel
-        label="Parent"
-        control={
-          <Checkbox
-            checked={checked[0] && checked[1]}
-            indeterminate={checked[0] !== checked[1]}
-            onChange={handleChange1}
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+      {dataRecap.map((recap, i) => {
+        return (
+          <FormControlLabel
+            label={recap.name}
+            key={i}
+            value={recap.isCheck}
+            control={<Checkbox checked={recap.isCheck} />}
+            onClick={(e) =>
+              handleChange(e, recap.name, !recap.isCheck)
+            }
           />
-        }
-      />
-      {children}
-    </div>
+        );
+      })}
+    </Box>
   );
 }
