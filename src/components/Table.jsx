@@ -24,6 +24,7 @@ import ReportModal from './ReportModal';
 import Loading from './Loading';
 import ClientModal from './ClientModal';
 import PaginationRounded from './Pagination';
+import Recaption from './Recaption';
 
 export default function BasicTable() {
   const [reportList, setReportList] = useState([]);
@@ -91,6 +92,7 @@ export default function BasicTable() {
             <CellStyled>Isi</CellStyled>
             <CellStyled>Action</CellStyled>
             <CellStyled>Tanggapi</CellStyled>
+            <CellStyled>Rekap</CellStyled>
           </TableRow>
         </TableHead>
         <TableBody
@@ -159,6 +161,9 @@ export default function BasicTable() {
                     <DeleteIcon />
                   </Button>
                 </ButtonGroup>
+              </CellStyled>
+              <CellStyled>
+                <Recaption />
               </CellStyled>
             </TableRow>
           ))}
