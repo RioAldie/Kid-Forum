@@ -14,7 +14,7 @@ const AdminLogin = () => {
   const signInWIthGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider).then((res) => {
-        if (res.user.uid !== 'enyZVoCsNwVbhYswZMQwM492Fbp2') {
+        if (res.user.uid !== 'oEwShCczjleSZvyIFLtpbLXhw513') {
           console.log('bukan admin');
           return setError(true);
         }
