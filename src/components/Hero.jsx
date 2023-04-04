@@ -66,10 +66,10 @@ const Hero = () => {
           },
         }}>
         <img
-          src="/images/hero-aduin.png"
+          src="/images/thum-lapak.png"
           alt="anak-anak indonesia"
-          width={550}
-          height={400}
+          width={582}
+          height={562}
         />
       </Box>
     </Box>

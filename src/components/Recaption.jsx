@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import RecapCheck from './RecapCheck';
+import { RecapCtx } from '../context/RecapContext';
 
 const style = {
   position: 'absolute',
@@ -16,10 +17,11 @@ const style = {
   p: 4,
 };
 
-export default function Recaption() {
-  const [open, setOpen] = React.useState(false);
+export default function Recaption(props) {
+  const { open, setOpen } = React.useContext(RecapCtx);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { recap, id } = props;
 
   return (
     <Box>
@@ -30,7 +32,7 @@ export default function Recaption() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={style}>
-          <RecapCheck />
+          <RecapCheck recaption={recap} id={id} />
         </Box>
       </Modal>
     </Box>

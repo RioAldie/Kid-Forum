@@ -31,7 +31,18 @@ const FormReport = () => {
   const [degree, setDegree] = useState('');
   const [location, setLocation] = useState('');
   const [relation, setRelation] = useState('');
-
+  const [NIK, setNIK] = useState(0);
+  let recapList = [
+    { name: 'Rujukan Langsung', isCheck: false },
+    { name: 'Pendampingan', isCheck: false },
+    { name: 'Penjangkauan', isCheck: false },
+    { name: 'Mediasi', isCheck: false },
+    { name: 'Bantuan Hukum', isCheck: false },
+    { name: 'Psikososisal', isCheck: false },
+    { name: 'Rehabilitasi', isCheck: false },
+    { name: 'Bantuan Medis', isCheck: false },
+    { name: 'Konseling Keluarga Psikolog', isCheck: false },
+  ];
   const userEmail = JSON.parse(localStorage.getItem('user-email'));
   const handleStatus = () => {
     let day = new Date().getDate();
@@ -56,10 +67,10 @@ const FormReport = () => {
       gender,
       job,
       index: dates,
+      recapList,
+      NIK,
     };
-    console.log('report: ', dataReport);
 
-    console.log('index', dates);
     handleSubmitReport(dataReport);
   };
 
@@ -130,7 +141,7 @@ const FormReport = () => {
         flexDirection: 'column',
         gap: '20px',
         marginTop: '50px',
-        height: '1200px',
+        height: '1300px',
         padding: '10px',
         borderRadius: '8px',
       }}
@@ -173,6 +184,15 @@ const FormReport = () => {
           onChange={(e) => setName(e.target.value)}
           value={name}
           required
+        />
+        <TextField
+          fullWidth
+          id="nik"
+          label="NIK"
+          type="number"
+          variant="outlined"
+          onChange={(e) => setNIK(e.target.value)}
+          value={NIK}
         />
         <TextField
           fullWidth

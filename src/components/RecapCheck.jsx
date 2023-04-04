@@ -2,56 +2,69 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { Typography, Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ClearIcon from '@mui/icons-material/Clear';
+import SendIcon from '@mui/icons-material/Send';
+import DoneIcon from '@mui/icons-material/Done';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../config';
+import Loading from './Loading';
+import { RecapCtx } from '../context/RecapContext';
 
-export default function RecapCheck() {
-  const [checked, setChecked] = React.useState([true, false]);
-  const recap = [
-    { name: 'tes1', isCheck: false },
-    { name: 'tes2', isCheck: false },
-    { name: 'tes3', isCheck: false },
-  ];
-  const handleChange1 = (event) => {
-    setChecked([event.target.checked, event.target.checked]);
+export default function RecapCheck(props) {
+  const { setOpen } = React.useContext(RecapCtx);
+  const { recaption, id } = props;
+  const [isChange, setIsChange] = React.useState(false);
+  const [dataRecap, setDataRecap] = React.useState(recaption);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const handleChange = (label, value) => {
+    let newObj = dataRecap;
+    let getIndex = newObj.findIndex((obj) => obj.name == label);
+
+    newObj[getIndex].isCheck = value;
+
+    setDataRecap(newObj);
+    setIsChange(!isChange);
   };
-
-  const handleChange2 = (event) => {
-    setChecked([event.target.checked, checked[1]]);
+  const handleUpdate = async (id) => {
+    setIsLoading(true);
+    const movieDoc = doc(db, 'reports', id);
+    await updateDoc(movieDoc, { recapList: dataRecap }).then(() => {
+      setIsLoading(false);
+      setOpen(false);
+    });
   };
-
-  const handleChange3 = (event) => {
-    setChecked([checked[0], event.target.checked]);
-  };
-
-  const children = (
-    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-      <FormControlLabel
-        label="Child 1"
-        control={
-          <Checkbox checked={checked[0]} onChange={handleChange2} />
-        }
-      />
-      <FormControlLabel
-        label="Child 2"
-        control={
-          <Checkbox checked={checked[1]} onChange={handleChange3} />
-        }
-      />
-    </Box>
-  );
-
   return (
-    <div>
-      <FormControlLabel
-        label="Parent"
-        control={
-          <Checkbox
-            checked={checked[0] && checked[1]}
-            indeterminate={checked[0] !== checked[1]}
-            onChange={handleChange1}
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+      <Loading open={isLoading} />
+      <Typography variant="h6">Tindak Lanjut</Typography>
+      {dataRecap.map((recap, i) => {
+        return (
+          <FormControlLabel
+            label={recap.name}
+            key={i}
+            value={recap.isCheck}
+            control={<Checkbox checked={recap.isCheck} />}
+            onClick={(e) => handleChange(recap.name, !recap.isCheck)}
           />
-        }
-      />
-      {children}
-    </div>
+        );
+      })}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          gap: '20px',
+        }}>
+        <Button variant="outlined" onClick={() => setOpen(false)}>
+          <ClearIcon />
+        </Button>
+        <Button variant="contained" onClick={() => handleUpdate(id)}>
+          <DoneIcon />
+        </Button>
+      </Box>
+    </Box>
   );
 }
