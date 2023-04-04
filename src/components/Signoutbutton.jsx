@@ -7,7 +7,7 @@ import { loginCtx } from '../context/LoginContext';
 import Loading from './Loading';
 
 const Signoutbutton = () => {
-  const { isLogin, setIsLogin } = useContext(loginCtx);
+  const { setIsLogin } = useContext(loginCtx);
   const [isLoading, setIsLoading] = useState(false);
   const signOutWIthGoogle = async () => {
     try {

@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider } from '../config';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { adminCtx } from '../context/AdminContext';
 
 const AdminLogin = () => {

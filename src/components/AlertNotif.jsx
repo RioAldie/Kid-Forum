@@ -1,21 +1,10 @@
-import { Box, Button, Modal, Stack, Typography } from '@mui/material';
+import { Box, Button, Modal, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { StatusCtx } from '../context/StatusContext';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 const AlertNotif = () => {
-  const [open, setOpen] = useState();
+  const [setOpen] = useState();
   const { status, setStatus } = useContext(StatusCtx);
   const handleClose = () => {
     setOpen(false);

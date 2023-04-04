@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
-import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 
 const CardFeature = (props) => {
   const { name, icon } = props;
