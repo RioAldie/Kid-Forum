@@ -14,21 +14,21 @@ const AdminLogin = () => {
     try {
       await signInWithPopup(auth, googleProvider).then((res) => {
         if (
-          res.user.uid !== 'oEwShCczjleSZvyIFLtpbLXhw513' ||
-          res.user.uid !== 'enyZVoCsNwVbhYswZMQwM492Fbp2'
+          res.user.uid === 'oEwShCczjleSZvyIFLtpbLXhw513' ||
+          res.user.uid === 'enyZVoCsNwVbhYswZMQwM492Fbp2'
         ) {
-          console.log('bukan admin');
-          return setError(true);
+          localStorage.setItem(
+            'admin-active',
+            JSON.stringify(res.user.uid)
+          );
+          setIsAdmin(true);
+          navigate('../admin', { replace: true });
         }
-        localStorage.setItem(
-          'admin-active',
-          JSON.stringify(res.user.uid)
-        );
-        setIsAdmin(true);
-        navigate('../admin', { replace: true });
+        return setError(true);
       });
     } catch (error) {
       console.error(error);
+      return setError(true);
     }
   };
 
