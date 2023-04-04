@@ -1,9 +1,7 @@
 import { Box, Paper, Typography } from '@mui/material';
-import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 import CardFeature from './CardFeature';
 import datasFeature from '../services/features';
 import ButtonGoRed from './ButtonGoRed';
-import { Link } from 'react-router-dom';
 
 const Feature = () => {
   return (

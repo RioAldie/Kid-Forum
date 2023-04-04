@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, CssBaseline, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import SignupForm from './FormSignup';
 
 const Signup = () => {

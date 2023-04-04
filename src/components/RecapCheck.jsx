@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Typography, Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+
 import ClearIcon from '@mui/icons-material/Clear';
-import SendIcon from '@mui/icons-material/Send';
+
 import DoneIcon from '@mui/icons-material/Done';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../config';

@@ -37,6 +37,7 @@ export default function ClientModal({ props }) {
     degree,
     relation,
     age,
+    NIK,
   } = props;
 
   const DisplayClientData = (value) => {
@@ -69,6 +70,7 @@ export default function ClientModal({ props }) {
             }}>
             Biodata
           </Typography>
+          <DisplayClientData value={NIK} type={'NIK'} />
           <DisplayClientData value={name} type={'Nama'} />
           <DisplayClientData value={email} type={'Email'} />
           <DisplayClientData value={phone} type={'No Telp/Wa'} />

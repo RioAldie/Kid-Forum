@@ -1,9 +1,9 @@
 import { Box, Button, styled } from '@mui/material';
-import { SetStateAction, useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function ProfileBar(props) {
   const [bar, setBar] = useState('Profile');
-  const { actived, setActived } = props;
+  const { setActived } = props;
 
   const handleBarActive = (item) => {
     setBar(item != bar ? item : bar);

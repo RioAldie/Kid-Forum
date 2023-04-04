@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { loginCtx } from '../context/LoginContext';
 
