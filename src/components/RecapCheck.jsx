@@ -7,11 +7,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ClearIcon from '@mui/icons-material/Clear';
 import SendIcon from '@mui/icons-material/Send';
 import DoneIcon from '@mui/icons-material/Done';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../config';
+import Loading from './Loading';
+import { RecapCtx } from '../context/RecapContext';
 
 export default function RecapCheck(props) {
-  const { recaption } = props;
+  const { setOpen } = React.useContext(RecapCtx);
+  const { recaption, id } = props;
   const [isChange, setIsChange] = React.useState(false);
   const [dataRecap, setDataRecap] = React.useState(recaption);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleChange = (label, value) => {
     let newObj = dataRecap;
@@ -22,9 +28,17 @@ export default function RecapCheck(props) {
     setDataRecap(newObj);
     setIsChange(!isChange);
   };
-
+  const handleUpdate = async (id) => {
+    setIsLoading(true);
+    const movieDoc = doc(db, 'reports', id);
+    await updateDoc(movieDoc, { recapList: dataRecap }).then(() => {
+      setIsLoading(false);
+      setOpen(false);
+    });
+  };
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+      <Loading open={isLoading} />
       <Typography variant="h6">Tindak Lanjut</Typography>
       {dataRecap.map((recap, i) => {
         return (
@@ -44,10 +58,10 @@ export default function RecapCheck(props) {
           justifyContent: 'center',
           gap: '20px',
         }}>
-        <Button variant="outlined">
+        <Button variant="outlined" onClick={() => setOpen(false)}>
           <ClearIcon />
         </Button>
-        <Button variant="contained">
+        <Button variant="contained" onClick={() => handleUpdate(id)}>
           <DoneIcon />
         </Button>
       </Box>

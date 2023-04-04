@@ -24,6 +24,7 @@ import ReportModal from './ReportModal';
 import Loading from './Loading';
 import ClientModal from './ClientModal';
 import Recaption from './Recaption';
+import RecapCtxProvider from '../context/RecapContext';
 
 export default function BasicTable() {
   const [reportList, setReportList] = useState([]);
@@ -162,7 +163,9 @@ export default function BasicTable() {
                 </ButtonGroup>
               </CellStyled>
               <CellStyled>
-                <Recaption recap={row.recapList} />
+                <RecapCtxProvider>
+                  <Recaption recap={row.recapList} id={row.id} />
+                </RecapCtxProvider>
               </CellStyled>
             </TableRow>
           ))}

@@ -31,7 +31,7 @@ const FormReport = () => {
   const [degree, setDegree] = useState('');
   const [location, setLocation] = useState('');
   const [relation, setRelation] = useState('');
-  const [NIK, setNIK] = useState('');
+  const [NIK, setNIK] = useState(0);
   let recapList = [
     { name: 'Rujukan Langsung', isCheck: false },
     { name: 'Pendampingan', isCheck: false },
@@ -70,9 +70,7 @@ const FormReport = () => {
       recapList,
       NIK,
     };
-    console.log('report: ', dataReport);
 
-    console.log('index', dates);
     handleSubmitReport(dataReport);
   };
 
@@ -191,7 +189,7 @@ const FormReport = () => {
           fullWidth
           id="nik"
           label="NIK"
-          type="text"
+          type="number"
           variant="outlined"
           onChange={(e) => setNIK(e.target.value)}
           value={NIK}
