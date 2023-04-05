@@ -54,7 +54,7 @@ export default function SignupForm() {
         )}
         {err && <Alert severity="error">Daftar Tidak Berhasil</Alert>}
         <Typography variant="h5" color={'primary'}>
-          Daftar Aduin
+          Daftar
         </Typography>
 
         <TextField
@@ -83,12 +83,6 @@ export default function SignupForm() {
           Daftar
         </Button>
         <AuthWithGoogle />
-        <Typography variant="subtitle1">
-          Sudah Punya Akun ?
-          <Link href="#" underline="none">
-            {' Sign In'}
-          </Link>
-        </Typography>
       </BoxStyled>
     </Box>
   );

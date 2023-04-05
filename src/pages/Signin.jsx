@@ -11,7 +11,7 @@ import {
 import { useContext, useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthWithGoogle from '../config/AuthWithGoogle';
 import AdminLogin from '../components/AdminLogin';
 import { loginCtx } from '../context/LoginContext';
@@ -29,6 +29,7 @@ const Signin = () => {
   const [password, setPassword] = useState('');
   const { setIsLogin, setShow, show } = useContext(loginCtx);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const signInManual = async () => {
     try {
       setIsLoading(true);
@@ -44,8 +45,11 @@ const Signin = () => {
           );
           setIsLogin(true);
           setShow(false);
+          navigate('/');
         })
-        .finally(() => setIsLoading(false));
+        .finally(() => {
+          setIsLoading(false);
+        });
     } catch (error) {
       setErr(true);
       setIsLoading(false);

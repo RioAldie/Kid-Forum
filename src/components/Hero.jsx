@@ -27,13 +27,14 @@ const Hero = () => {
         }}>
         <Typography
           sx={{
-            fontSize: { xs: 30, sm: 30, md: 36 },
+            fontSize: { xs: 33, sm: 33, md: 36 },
             fontFamily: 'sans-serif',
             fontWeight: '600',
             lineBreak: { xs: 0, sm: 0, md: 1 },
             width: { lg: '600px', sm: '90%', xs: '90%' },
             maxHeight: '250px',
             color: '#fff',
+            lineHeight: { xs: 1.2, sm: 1.2, md: 1.3, xl: 1.3 },
           }}>
           Laporan Penanganan Aduan{' '}
           <span style={{ color: '#FFE351' }}>
