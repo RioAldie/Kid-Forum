@@ -4,14 +4,14 @@ import { signInWithPopup, signOut } from 'firebase/auth';
 import { useContext, useState } from 'react';
 import { loginCtx } from '../context/LoginContext';
 import GoogleButton from 'react-google-button';
+import { useNavigate } from 'react-router-dom';
 
 const AuthWithGoogle = () => {
-  const { isLogin, setIsLogin } = useContext(loginCtx);
-
+  const { setIsLogin } = useContext(loginCtx);
+  const navigate = useNavigate();
   const signInWIthGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider).then((res) => {
-        console.log('user data: ', res.user.uid);
         localStorage.setItem(
           'user-active',
           JSON.stringify(res.user.uid)
@@ -21,6 +21,7 @@ const AuthWithGoogle = () => {
           JSON.stringify(res.user.email)
         );
         setIsLogin(true);
+        navigate('/');
       });
     } catch (error) {
       console.error(error);
