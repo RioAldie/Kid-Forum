@@ -1,5 +1,6 @@
 {
   "name": "forum-app",
+  "homepage": "http://192.168.253.121/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

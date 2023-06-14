@@ -21,7 +21,7 @@ import Report from './pages/Report';
 import Signup from './pages/Signup';
 
 function App() {
-  const { isLogin, setShow } = useContext(loginCtx);
+  const { isLogin } = useContext(loginCtx);
   const { isAdmin } = useContext(adminCtx);
   const RequireAuth = ({ children }) => {
     if (isLogin) {
