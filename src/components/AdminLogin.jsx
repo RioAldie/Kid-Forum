@@ -16,7 +16,9 @@ const AdminLogin = () => {
         if (
           res.user.uid === 'oEwShCczjleSZvyIFLtpbLXhw513' ||
           res.user.uid === 'enyZVoCsNwVbhYswZMQwM492Fbp2' ||
-          res.user.uid === '5e0pqlYXCyWvD1LSIsUmrv76nix1'
+          res.user.uid === '5e0pqlYXCyWvD1LSIsUmrv76nix1' ||
+          res.user.uid === 'lv5zVlSanpZZV0kngIJPl7roO8i1' ||
+          res.user.uid === 'iB47nGcNHmNH8PgAxoh2OlwBwMq1'
         ) {
           localStorage.setItem(
             'admin-active',
